@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="dangyuan-web:war">
+    <output-path>$PROJECT_DIR$/dangyuan-web/target</output-path>
+    <root id="archive" name="dangyuan-web.war">
+      <element id="artifact" artifact-name="dangyuan-web:war exploded" />
+    </root>
+  </artifact>
+</component>

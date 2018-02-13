@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/dangyuan-common/dangyuan-common.iml" filepath="$PROJECT_DIR$/dangyuan-common/dangyuan-common.iml" />
+      <module fileurl="file://$PROJECT_DIR$/dangyuan-dao/dangyuan-dao.iml" filepath="$PROJECT_DIR$/dangyuan-dao/dangyuan-dao.iml" />
+      <module fileurl="file://$PROJECT_DIR$/dangyuan-parent/dangyuan-parent.iml" filepath="$PROJECT_DIR$/dangyuan-parent/dangyuan-parent.iml" />
+      <module fileurl="file://$PROJECT_DIR$/dangyuan-pojo/dangyuan-pojo.iml" filepath="$PROJECT_DIR$/dangyuan-pojo/dangyuan-pojo.iml" />
+      <module fileurl="file://$PROJECT_DIR$/dangyuan-service/dangyuan-service.iml" filepath="$PROJECT_DIR$/dangyuan-service/dangyuan-service.iml" />
+      <module fileurl="file://$PROJECT_DIR$/dangyuan-web/dangyuan-web.iml" filepath="$PROJECT_DIR$/dangyuan-web/dangyuan-web.iml" />
+    </modules>
+  </component>
+</project>
