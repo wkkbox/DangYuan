@@ -3,7 +3,7 @@ package com.telecom.jx.dangyuan.pojo.po;
 import java.io.Serializable;
 
 /**
- * 党责
+ * 党责实体
  */
 public class DangZe implements Serializable {
 

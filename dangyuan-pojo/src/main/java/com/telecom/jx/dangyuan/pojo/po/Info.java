@@ -3,7 +3,7 @@ package com.telecom.jx.dangyuan.pojo.po;
 import java.io.Serializable;
 
 /**
- * 消息
+ * 消息实体
  */
 public class Info implements Serializable{
     private Long id;//主键

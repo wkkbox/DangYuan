@@ -3,7 +3,7 @@ package com.telecom.jx.dangyuan.pojo.po;
 import java.io.Serializable;
 
 /**
- * 用户
+ * 用户实体
  */
 public class User implements Serializable {
 

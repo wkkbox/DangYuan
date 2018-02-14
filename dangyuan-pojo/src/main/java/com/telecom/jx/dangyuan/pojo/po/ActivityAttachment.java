@@ -3,7 +3,7 @@ package com.telecom.jx.dangyuan.pojo.po;
 import java.io.Serializable;
 
 /**
- * 完成活动后上传的活动附件
+ * 完成活动后上传的活动附件实体
  */
 public class ActivityAttachment implements Serializable {
 
