@@ -15,9 +15,11 @@ public interface UserMapper {
 
     User selectUserByAccountName(String accountName) throws Exception;
 
-    List<Long> selectUserRolesByUserId(Long userId) throws Exception;
+    List<String> selectUserRolesByUserId(Long userId) throws Exception;
 
-    Set<String> selectUserPermissionsByUserId(Long userId) throws Exception;
+    List<Long> selectUserRoleIdsByUserId(Long userId) throws Exception;
+
+    List<String> selectUserPermissionsByUserId(Long userId) throws Exception;
 
     List<Menu> selectMenusByUserId(Long userId) throws Exception;
 

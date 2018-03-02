@@ -1,7 +1,10 @@
 package com.telecom.jx.dangyuan.mapper;
 
-import com.telecom.jx.dangyuan.pojo.po.ActivityContent;
+import com.telecom.jx.dangyuan.pojo.po.DangZeContent;
 
 public interface ActivityContentMapper {
-    void insertActivityContent(ActivityContent activityContent) throws Exception;
+    //未使用
+    void insertActivityContent(DangZeContent activityContent) throws Exception;
+
+    void insertDangZeContent(DangZeContent dangZeContent) throws Exception;
 }

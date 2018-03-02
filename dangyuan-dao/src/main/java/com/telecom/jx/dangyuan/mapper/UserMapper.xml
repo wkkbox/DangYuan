@@ -62,7 +62,7 @@
     </select>
 
     <!--查询本用户的用户角色id集合-->
-    <select id="selectUserRolesByUserId" parameterType="java.lang.Long" resultType="java.lang.Long">
+    <select id="selectUserRoleIdsByUserId" parameterType="java.lang.Long" resultType="java.lang.Long">
         SELECT r.id
         FROM t_user u
         LEFT JOIN t_user_role u_r
@@ -72,8 +72,20 @@
         WHERE u.id = #{userId}
     </select>
 
+    <!--查询本用户的用户角色集合(admin,user...)-->
+    <select id="selectUserRolesByUserId" parameterType="java.lang.Long" resultType="java.lang.String">
+        SELECT r.role
+        FROM t_user u
+        LEFT JOIN t_user_role u_r
+        ON u.id = u_r.userId
+        LEFT JOIN t_role r
+        ON u_r.roleId = r.id
+        WHERE u.id = #{userId}
+    </select>
+
+    <!--查询本用户的用户权限集合(user:create...)-->
     <select id="selectUserPermissionsByUserId" parameterType="java.lang.Long" resultType="java.lang.String">
-        SELECT p.permName
+        SELECT p.perm
         FROM t_user u
         LEFT JOIN t_user_role u_r
         ON u.id = u_r.userId

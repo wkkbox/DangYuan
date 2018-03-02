@@ -7,13 +7,26 @@
         d.id id,
         d.title title,
         d.content content,
-        d.scoreRule scoreRule,
-        d.publishtime publishtime,
-        d.endtime endtime,
-        d.roleId roleId
+        d.publishTime publishTime,
+        d.roleId roleId,
+        d.dScore dScore,
+        d.lScore lScore,
+        d.hScore hScore,
+        d.rate rate,
+        d.sumScore sumScore
     </sql>
 
-    <!--查询用户所有党责活动-->
+    <sql id="dangZeCustomBaseSql">
+        d_a.id arrangeId,d_a.month month,d_a.time time,d_a.dangzeId dangzeId,
+        d.title title,d.content content,d.roleId roleId,d.dScore dScore,d.lScore lScore,d.hScore hScore,d.rate rate,d.sumScore
+    </sql>
+
+    <sql id="dangZe3CustomBaseSql">
+        d3_a.id arrangeId,d3_a.time time,d3_a.dangzeId dangzeId,
+        d.title title,d.content content,d.roleId roleId,d.dScore dScore,d.lScore lScore,d.hScore hScore,d.rate rate,d.sumScore
+    </sql>
+
+    <!--查询用户所有党责活动,未使用-->
     <select id="selectDangZes" parameterType="java.lang.Long" resultType="com.telecom.jx.dangyuan.pojo.po.DangZe">
         SELECT
         <include refid="baseSql"/>
@@ -21,12 +34,69 @@
         WHERE roleId >= #{roleId}
     </select>
 
-    <!--查询党责活动的完成状态-->
-    <select id="selectDangZeState" parameterType="java.util.Map" resultType="java.lang.Integer">
-        SELECT state
-        FROM t_user_dangze
-        WHERE userId = #{userId} AND dangzeId = #{dangzeId};
+    <!--查询用户当月所有党责活动(有次数的，rate=0，1，2)-->
+    <select id="selectDangZeCustoms" parameterType="java.util.Map"
+            resultType="com.telecom.jx.dangyuan.pojo.vo.DangZeCustom">
+        SELECT
+        <include refid="dangZeCustomBaseSql"/>
+        FROM t_dangze_arrange d_a
+        LEFT JOIN t_dangze d
+        ON d.id = d_a.dangzeId
+        LEFT JOIN t_dangze_content d_c
+        ON d_a.id = d_c.arrangeId
+        WHERE d_a.month = #{month}
     </select>
 
+    <!--查询用户所有党责活动(不限次数的，rate=3)-->
+    <select id="selectDangZe3Customs" parameterType="java.util.Map"
+            resultType="com.telecom.jx.dangyuan.pojo.vo.DangZeCustom">
+        SELECT
+        <include refid="dangZe3CustomBaseSql"/>
+        FROM t_dangze3_arrange d3_a
+        LEFT JOIN t_dangze d
+        ON d.id = d3_a.dangzeId
+        LEFT JOIN t_dangze_content d_c
+        ON d3_a.id = d_c.arrangeId
+        WHERE d3_a.year = #{year} and d3_a.userId = #{userId}
+    </select>
+
+    <!--查询党责活动的完成状态，申请是0，申请中是1，完成是2-->
+    <select id="selectDangZeState" parameterType="java.util.Map" resultType="java.lang.Integer">
+        SELECT u_d.state state
+        FROM t_user_dangze u_d
+        WHERE u_d.userId = #{userId} AND u_d.dangzeId = #{dangzeId} AND u_d.time = #{time} AND u_d.year = #{year}
+    </select>
+
+    <select id="selectDangZeAttachmentByArrangeIdAndUserId" parameterType="java.lang.Long"
+            resultType="com.telecom.jx.dangyuan.pojo.po.ActivityAttachment">
+        SELECT a_a.id id,a_a.localAddress localAddress,a_a.serverAddress serverAddress,a_a.attachmentType attachmentType,a_a.uploadTime uploadTime,a_a.contentId contentId,a_a.activityType activityType
+        FROM t_activity_attachment a_a
+        LEFT JOIN t_dangze_content d_c
+        ON d_c.id = a_a.contentId
+        WHERE d_c.arrangeId = #{arranged} and d_c.userId = #{userId}
+    </select>
+
+    <select id="selectDangZeContentByArrangeIdAndUserId" parameterType="java.util.Map" resultType="java.lang.String">
+        SELECT d_c.content
+        FROM t_dangze_content d_c
+        WHERE d_c.userId = #{userId} AND d_c.arrangeId = #{arrangeId}
+    </select>
+
+    <insert id="insertUserDangZe" parameterType="java.util.Map">
+        INSERT INTO t_user_dangze(userId,dangzeId,time,year,state,rScore,commitTime)
+        VALUES (#{userId},#{dangzeId},#{time},#{year},#{state},#{rScore},#{commitTime})
+    </insert>
+
+
+    <insert id="insertDangZe3Arrange" parameterType="java.util.Map">
+        INSERT INTO t_dangze3_arrange(id,year,userId,time,dangzeId)
+        VALUES (#{id},#{year},#{userId},#{time},#{dangzeId})
+    </insert>
+
+    <select id="selectDangze3ArrangeCount" parameterType="java.util.Map" resultType="java.lang.Integer">
+        SELECT count(1) count
+        FROM t_dangze3_arrange d3_a
+        WHERE d3_a.year = #{year} AND d3_a.userId = #{userId} AND d3_a.dangzeId = #{dangzeId}
+    </select>
 
 </mapper>

@@ -11,7 +11,7 @@ public class User implements Serializable {
     private String accountName;//账户名,手机号
     private String userName;//真实姓名
     private String password;//密码Ad123@min,d3a4388accf317083f4d9dabda2f2c38
-    private String gender;//性别,0表示女1,表示男
+    private String gender;//性别,0表示女，1表示男
     private String salt;
     private String nation;//民族
     private String nativeplace;//籍贯
@@ -20,7 +20,7 @@ public class User implements Serializable {
     private String inpartyday;//入党年月,格式:yyyy-MM 1996-09
     private String job;//职务
     private String inandout;//调入、调出时间及单位
-    private Float score;//积分
+    private Integer score;//积分
     private String branch;//所属支部
 
     private int unreadInfoCount = 0;//未读信息条数
@@ -132,11 +132,11 @@ public class User implements Serializable {
         this.inandout = inandout;
     }
 
-    public Float getScore() {
+    public Integer getScore() {
         return score;
     }
 
-    public void setScore(Float score) {
+    public void setScore(Integer score) {
         this.score = score;
     }
 

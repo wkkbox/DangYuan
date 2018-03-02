@@ -1,8 +1,8 @@
 package com.telecom.jx.dangyuan.controller;
 
 import com.telecom.jx.dangyuan.pojo.po.ActivityAttachment;
-import com.telecom.jx.dangyuan.pojo.po.ActivityContent;
-import com.telecom.jx.dangyuan.pojo.po.DangZe;
+import com.telecom.jx.dangyuan.pojo.po.DangZeContent;
+import com.telecom.jx.dangyuan.pojo.vo.DangZeCustom;
 import com.telecom.jx.dangyuan.service.ActivityService;
 import com.telecom.jx.dangyuan.service.ActivityAttachmentService;
 import com.telecom.jx.dangyuan.service.UserService;
@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
+
 
 @Controller
 @RequestMapping("/activity")
@@ -30,7 +31,7 @@ public class ActivityController {
     private ActivityAttachmentService activityAttachmentService;
 
     /**
-     * 查询本用户所有活动，0表示党责活动
+     * 查询本用户当月所有活动，0表示党责活动
      *
      * @param userId
      * @param activityType
@@ -39,6 +40,7 @@ public class ActivityController {
     @ResponseBody
     @RequestMapping(value = {"/activities"}, produces = "application/json;charset=utf-8")
     public String activities(Long userId, Integer activityType) {
+        System.out.println("activities");
         MessageResult result = null;
         //id值越小角色权限越高
         Long roleId = null;
@@ -52,9 +54,10 @@ public class ActivityController {
             switch (activityType) {
                 //0是党责活动
                 case 0:
-                    List<DangZe> dangZeList = null;
-                    dangZeList = activityService.getDangZes(userId, roleId);
-                    result = new MessageResult(true, "查询成功", dangZeList);
+                    List<DangZeCustom> dangZeCustoms = null;
+                    dangZeCustoms = activityService.getDangZeCustoms(userId);
+                    System.out.println("dangZeCustoms:" + dangZeCustoms);
+                    result = new MessageResult(true, "查询成功", dangZeCustoms);
                     //System.out.println("currentUser=" + SecurityUtils.getSubject().getSession().getAttribute("currentUser"));
                     break;
                 //其余活动之后再写
@@ -67,22 +70,27 @@ public class ActivityController {
     }
 
     /**
-     * 上传完成的活动的活动记录
+     * 上传完成的党责活动的活动记录
      *
-     * @param activityContent
+     * @param dangZeContent
      * @return
      */
     @ResponseBody
-    @RequestMapping(value = {"/activityContent"}, produces = "application/json;charset=utf-8")
-    public String saveActivityContent(ActivityContent activityContent) {
-        System.out.println("activityContent = " + activityContent);
+    @RequestMapping(value = {"/dangzeContent"}, produces = "application/json;charset=utf-8")
+    public String saveActivityContent(DangZeContent dangZeContent, Long dangzeId, String time, Integer rate, Integer dScore, Integer sumScore) {
+        System.out.println("dangzeContent = " + dangZeContent);
+        System.out.println("dangzeId=" + dangzeId);
+        System.out.println("time=" + time);
+        System.out.println("rate=" + rate);
+        System.out.println("dScore" + dScore);
+        System.out.println("sumScore" + sumScore);
         MessageResult result = null;
         try {
-            Long activityContentId = activityService.saveActivityContent(activityContent);
-            result = new MessageResult(true, "提交活动记录成功", activityContentId);
+            Long dangZeContentId = activityService.saveDangZeContent(dangZeContent, dangzeId, time, rate, sumScore / dScore);
+            result = new MessageResult(true, "提交党责活动记录成功", dangZeContentId);
         } catch (Exception e) {
             e.printStackTrace();
-            result = new MessageResult(false, "提交活动记录失败", null);
+            result = new MessageResult(false, "提交党责活动记录失败", null);
         }
         return JsonUtils.objectToJson(result);
     }
@@ -113,4 +121,6 @@ public class ActivityController {
         }
         return JsonUtils.objectToJson(result);
     }
+
+
 }

@@ -7,16 +7,15 @@ import com.telecom.jx.dangyuan.util.dto.Menu;
 import com.telecom.jx.dangyuan.util.dto.PageBean;
 
 import java.util.List;
-import java.util.Set;
 
 public interface UserService {
     List<User> showUsers() throws Exception;
 
     List<User> getUserByUserName(String userName) throws Exception;
 
-    List<Long> getUserRolesByUserId(Long userId) throws Exception;
+    List<String> getUserRolesByUserId(Long userId) throws Exception;
 
-    Set<String> getUserPermissionsByUserId(Long userId) throws Exception;
+    List<String> getUserPermissionsByUserId(Long userId) throws Exception;
 
     List<Menu> getMenusByUserId(Long userId) throws Exception;
 

@@ -14,8 +14,9 @@
 
     <insert id="insertActivityAttachment" parameterType="com.telecom.jx.dangyuan.pojo.po.ActivityAttachment">
         INSERT INTO t_activity_attachment
-        (localAddress,serverAddress,attachmentType,uploadtime,activityContentId)
-        VALUES (#{localAddress},#{serverAddress},#{attachmentType},#{uploadtime},#{activityContentId})
+        (localAddress,serverAddress,attachmentType,uploadTime,contentId,activityType)
+        VALUES
+        (#{localAddress},#{serverAddress},#{attachmentType},#{uploadTime},#{contentId},#{activityType})
     </insert>
 
 

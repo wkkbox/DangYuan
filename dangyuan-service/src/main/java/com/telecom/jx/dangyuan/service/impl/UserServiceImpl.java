@@ -29,12 +29,12 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public List<Long> getUserRolesByUserId(Long userId) throws Exception {
+    public List<String> getUserRolesByUserId(Long userId) throws Exception {
         return userMapper.selectUserRolesByUserId(userId);
     }
 
     @Override
-    public Set<String> getUserPermissionsByUserId(Long userId) throws Exception {
+    public List<String> getUserPermissionsByUserId(Long userId) throws Exception {
         return userMapper.selectUserPermissionsByUserId(userId);
     }
 
@@ -71,7 +71,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public Long getUserHighRoleByUserId(Long userId) throws Exception {
         //得到角色id集合
-        List<Long> roleIds = userMapper.selectUserRolesByUserId(userId);
+        List<Long> roleIds = userMapper.selectUserRoleIdsByUserId(userId);
         if (roleIds.size() == 1) {
             return roleIds.get(0);
         } else {
