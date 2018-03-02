@@ -3,11 +3,13 @@ package com.telecom.jx.dangyuan.service.impl;
 import com.telecom.jx.dangyuan.mapper.InfoMapper;
 import com.telecom.jx.dangyuan.pojo.po.Info;
 import com.telecom.jx.dangyuan.service.InfoService;
+import com.telecom.jx.dangyuan.util.DateUtil;
 import com.telecom.jx.dangyuan.util.dto.PageBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -34,6 +36,7 @@ public class InfoServiceImpl implements InfoService {
         map.put("roleId", roleId);
         map.put("currentPage", (currentPage - 1) * pageSize);
         map.put("pageSize", pageSize);
+        map.put("year", DateUtil.getYear(new Date()));
         //查询本用户所有消息集合
         List<Info> infoList = infoMapper.selectInfoByPage(map);
         //查询本用户未读消息id集合

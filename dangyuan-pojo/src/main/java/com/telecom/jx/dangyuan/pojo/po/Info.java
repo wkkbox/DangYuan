@@ -9,6 +9,7 @@ public class Info implements Serializable{
     private Long id;//主键
     private String title;//标题
     private String content;//内容
+    private String year;//年份
     private String publishtime;//发布时间
     private Integer state = 0;//未读是0，已读是1，默认为0未读
     private Long roleId;//所属用户角色
@@ -63,5 +64,13 @@ public class Info implements Serializable{
 
     public void setRoleId(Long roleId) {
         this.roleId = roleId;
+    }
+
+    public String getYear() {
+        return year;
+    }
+
+    public void setYear(String year) {
+        this.year = year;
     }
 }
