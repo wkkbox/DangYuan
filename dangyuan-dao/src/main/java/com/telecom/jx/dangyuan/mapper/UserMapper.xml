@@ -14,26 +14,33 @@
         u.nativeplace nativeplace,
         u.birthday birthday,
         u.degree degree,
+        u.inworkday inworkday,
         u.inpartyday inpartyday,
-        u.job job,
+        u.partDuties partDuties,
+        u.administrativeDuties administrativeDuties,
+        u.profession profession,
+        u.positional positional,
+        u.idCard idCard,
         u.inandout inandout,
         u.score score,
-        u.branch branch
+        u.branch branch,
+        u.isFormal isFormal,
+        u.isWork isWork
     </sql>
 
-    <!--查询所有积分公示-->
+    <!--查询所有积分公示，在视图中-->
     <select id="selectScorePublicity" resultType="com.telecom.jx.dangyuan.pojo.vo.Score">
         SELECT id,userName,gender,score,branch
         FROM user_score_publicity
     </select>
-    <!--分页查询所有积分公示-->
+    <!--分页查询所有积分公示，在视图中-->
     <select id="selectScorePublicityByPage" parameterType="java.util.Map"
             resultType="com.telecom.jx.dangyuan.pojo.vo.Score">
         SELECT id,userName,gender,score,branch
         FROM user_score_publicity
         limit #{currentPage} , #{pageSize}
     </select>
-    <!--查询所有积分公示条数-->
+    <!--查询所有积分公示条数，在视图中-->
     <select id="selectScorePublicitySize" resultType="java.lang.Integer">
         SELECT count(1)
         FROM user_score_publicity

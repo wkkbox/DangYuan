@@ -10,6 +10,7 @@ public class DangZe implements Serializable {
     private Long id;//主键
     private String title;//党责标题
     private String content;//党责内容
+    private String year;//年份
     private String publishTime;//管理员发布党责时间
     private Long roleId;//所属用户角色
     private Integer dScore;//固定得分，1，2，3...
@@ -96,5 +97,13 @@ public class DangZe implements Serializable {
 
     public void setSumScore(Integer sumScore) {
         this.sumScore = sumScore;
+    }
+
+    public String getYear() {
+        return year;
+    }
+
+    public void setYear(String year) {
+        this.year = year;
     }
 }

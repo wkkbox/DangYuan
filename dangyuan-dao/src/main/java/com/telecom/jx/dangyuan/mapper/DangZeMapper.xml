@@ -7,6 +7,7 @@
         d.id id,
         d.title title,
         d.content content,
+        d.year year,
         d.publishTime publishTime,
         d.roleId roleId,
         d.dScore dScore,

@@ -5,6 +5,7 @@ import com.telecom.jx.dangyuan.pojo.po.User;
 import com.telecom.jx.dangyuan.pojo.vo.Score;
 import com.telecom.jx.dangyuan.service.InfoService;
 import com.telecom.jx.dangyuan.service.UserService;
+import com.telecom.jx.dangyuan.util.DateUtil;
 import com.telecom.jx.dangyuan.util.JsonUtils;
 import com.telecom.jx.dangyuan.util.dto.MessageResult;
 import com.telecom.jx.dangyuan.util.dto.PageBean;
@@ -21,7 +22,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Controller
 @RequestMapping("/user")
@@ -73,7 +77,10 @@ public class UserController {
                 //登录成功currentUser存入session
                 subject.getSession().setAttribute("currentUser", currentUser);
                 //登录成功查询未读信息条数
-                int unreadInfoCount = infoService.getUnreadInfoCount(currentUser.getId());
+                Map<String, Object> map = new HashMap<>();
+                map.put("userId", currentUser.getId());
+                map.put("year", DateUtil.getYear(new Date()));
+                int unreadInfoCount = infoService.getUnreadInfoCount(map);
                 currentUser.setUnreadInfoCount(unreadInfoCount);
                 //User currentUser = userService.getUserByName(user.getUserName());
                 //List<Menu> menus = userService.getMenusByUserId(currentUser.getId());

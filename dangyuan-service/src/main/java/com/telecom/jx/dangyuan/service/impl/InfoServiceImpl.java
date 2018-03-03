@@ -21,15 +21,13 @@ public class InfoServiceImpl implements InfoService {
     private InfoMapper infoMapper;
 
     @Override
-    public Integer getUnreadInfoCount(Long userId) throws Exception {
-        return infoMapper.selectUnreadInfoCount(userId);
+    public Integer getUnreadInfoCount(Map<String, Object> map) throws Exception {
+        return infoMapper.selectUnreadInfoCount(map);
     }
 
     @Override
     public PageBean<Info> getInfos(Long userId, Long roleId, Integer currentPage, Integer pageSize) throws Exception {
         Map<String, Object> map = new HashMap<>();
-        //消息总数
-        Integer count = infoMapper.selectInfoSize(roleId);
         PageBean<Info> pBean = new PageBean<>();
         pBean.setCurrentPage(currentPage);
         pBean.setPageSize(pageSize);
@@ -37,14 +35,19 @@ public class InfoServiceImpl implements InfoService {
         map.put("currentPage", (currentPage - 1) * pageSize);
         map.put("pageSize", pageSize);
         map.put("year", DateUtil.getYear(new Date()));
+        //消息总数
+        Integer count = infoMapper.selectInfoSize(map);
         //查询本用户所有消息集合
         List<Info> infoList = infoMapper.selectInfoByPage(map);
         //查询本用户未读消息id集合
-        List<Long> unReadInfoIds = infoMapper.selectUnreadInfoId(userId);
+        map.put("userId", userId);
+        List<Long> unReadInfoIds = infoMapper.selectUnreadInfoId(map);
         //已读消息设置状态state为1
         for (Info item : infoList) {
             if (!unReadInfoIds.contains(item.getId())) {
                 item.setState(1);
+            }else {
+                item.setState(0);
             }
         }
         pBean.setpList(infoList);

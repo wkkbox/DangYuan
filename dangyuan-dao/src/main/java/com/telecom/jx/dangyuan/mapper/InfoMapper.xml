@@ -13,17 +13,17 @@
     </sql>
 
     <!--查询本用户未读消息数量-->
-    <select id="selectUnreadInfoCount" parameterType="java.lang.Long" resultType="java.lang.Integer">
+    <select id="selectUnreadInfoCount" parameterType="java.util.Map" resultType="java.lang.Integer">
         SELECT count(1)
         FROM t_user_unreadedinfo
-        WHERE userId = #{userId}
+        WHERE userId = #{userId} AND year = #{yaer}
     </select>
 
     <!--查询本用户所有的消息总数-->
-    <select id="selectInfoSize" parameterType="java.lang.Long" resultType="java.lang.Integer">
+    <select id="selectInfoSize" parameterType="java.util.Map" resultType="java.lang.Integer">
         SELECT count(1)
         FROM t_info
-        WHERE roleId >= #{roleId};
+        WHERE roleId >= #{roleId} AND year = #{yaer}
     </select>
 
     <!--分页查询本用户所有的消息集合-->
@@ -39,7 +39,7 @@
     <select id="selectUnreadInfoId" parameterType="java.lang.Long" resultType="java.lang.Long">
         SELECT infoId
         FROM t_user_unreadedinfo
-        WHERE userId = #{userId};
+        WHERE userId = #{userId} AND year = #{year}
     </select>
 
     <!--根据消息id查询消息-->
@@ -47,12 +47,12 @@
         SELECT
         <include refid="baseSql"/>
         FROM t_info i
-        WHERE id = #{infoId};
+        WHERE id = #{infoId}
     </select>
 
     <!--将已读消息从t_user_unreadedinfo中删除-->
     <delete id="updateInfoReaded" parameterType="java.lang.Long">
-        DELETE FROM t_user_unreadedinfo WHERE infoId = #{infoId};
+        DELETE FROM t_user_unreadedinfo WHERE infoId = #{infoId}
     </delete>
 
 </mapper>
