@@ -28,14 +28,6 @@
         d.title title,d.content content,d.roleId roleId,d.dScore dScore,d.lScore lScore,d.hScore hScore,d.rate rate,d.otherAttr otherAttr,d.sumScore
     </sql>
 
-    <!--查询用户所有党责活动,未使用-->
-    <select id="selectDangZes" parameterType="java.lang.Long" resultType="com.telecom.jx.dangyuan.pojo.po.DangZe">
-        SELECT
-        <include refid="baseSql"/>
-        FROM t_dangze d
-        WHERE roleId >= #{roleId}
-    </select>
-
     <!--查询用户当月所有党责活动(有次数的，rate=0，1，2)-->
     <select id="selectProfessDevelopCustoms" parameterType="java.util.Map"
             resultType="com.telecom.jx.dangyuan.pojo.vo.ProfessDevelopCustom">
@@ -84,21 +76,21 @@
         WHERE d_c.userId = #{userId} AND d_c.arrangeId = #{arrangeId}
     </select>
 
-    <insert id="insertUserDangZe" parameterType="java.util.Map">
-        INSERT INTO t_user_dangze(userId,dangzeId,time,year,state,rScore,commitTime)
-        VALUES (#{userId},#{dangzeId},#{time},#{year},#{state},#{rScore},#{commitTime})
+    <insert id="insertUserProfessDevelop" parameterType="java.util.Map">
+        INSERT INTO t_user_dangze(userId,professdevelopId,time,year,state,rScore,commitTime)
+        VALUES (#{userId},#{professdevelopId},#{time},#{year},#{state},#{rScore},#{commitTime})
     </insert>
 
 
-    <insert id="insertDangZe3Arrange" parameterType="java.util.Map">
-        INSERT INTO t_dangze3_arrange(id,year,userId,time,dangzeId)
-        VALUES (#{id},#{year},#{userId},#{time},#{dangzeId})
+    <insert id="insertProfessDevelop3Arrange" parameterType="java.util.Map">
+        INSERT INTO t_professdevelop3_arrange(id,year,userId,time,professdevelopId)
+        VALUES (#{id},#{year},#{userId},#{time},#{professdevelopId})
     </insert>
 
-    <select id="selectDangze3ArrangeCount" parameterType="java.util.Map" resultType="java.lang.Integer">
+    <select id="selectProfessDevelop3ArrangeCount" parameterType="java.util.Map" resultType="java.lang.Integer">
         SELECT count(1) count
-        FROM t_dangze3_arrange d3_a
-        WHERE d3_a.year = #{year} AND d3_a.userId = #{userId} AND d3_a.dangzeId = #{dangzeId}
+        FROM t_professdevelop3_arrange d3_a
+        WHERE d3_a.year = #{year} AND d3_a.userId = #{userId} AND d3_a.professdevelopId = #{professdevelopId}
     </select>
 
 </mapper>

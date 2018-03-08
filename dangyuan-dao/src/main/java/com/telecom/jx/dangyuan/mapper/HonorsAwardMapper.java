@@ -1,14 +1,12 @@
 package com.telecom.jx.dangyuan.mapper;
 
 import com.telecom.jx.dangyuan.pojo.po.ActivityAttachment;
-import com.telecom.jx.dangyuan.pojo.po.DangZe;
 import com.telecom.jx.dangyuan.pojo.vo.HonorsAwardCustom;
 
 import java.util.List;
 import java.util.Map;
 
 public interface HonorsAwardMapper {
-    List<DangZe> selectDangZes(Long roleId) throws Exception;
 
     List<HonorsAwardCustom> selectHonorsAwardCustoms(Map<String, Object> map) throws Exception;
 
@@ -18,11 +16,11 @@ public interface HonorsAwardMapper {
 
     List<ActivityAttachment> selectHonorsAwardAttachmentByArrangeIdAndUserId(Map<String, Object> map) throws Exception;
 
-    void insertUserDangZe(Map<String, Object> map) throws Exception;
+    void insertUserHonorsAward(Map<String, Object> map) throws Exception;
 
-    void insertDangZe3Arrange(Map<String, Object> map) throws Exception;
+    void insertHonorsAward3Arrange(Map<String, Object> map) throws Exception;
 
     List<HonorsAwardCustom> selectHonorsAward3Customs(Map<String, Object> map) throws Exception;
 
-    Integer selectDangze3ArrangeCount(Map<String, Object> map) throws Exception;
+    Integer selectHonorsAward3ArrangeCount(Map<String, Object> map) throws Exception;
 }

@@ -1,8 +1,7 @@
 package com.telecom.jx.dangyuan.service.impl;
 
 import com.telecom.jx.dangyuan.mapper.*;
-import com.telecom.jx.dangyuan.pojo.po.DangZeContent;
-import com.telecom.jx.dangyuan.pojo.po.DangZe;
+import com.telecom.jx.dangyuan.pojo.po.*;
 import com.telecom.jx.dangyuan.pojo.vo.*;
 import com.telecom.jx.dangyuan.service.ActivityService;
 import com.telecom.jx.dangyuan.util.DateUtil;
@@ -111,12 +110,11 @@ public class ActivityServiceImpl implements ActivityService {
         map.put("rScore", 0);
         map.put("commitTime", DateUtil.getCurrentDate("yyyy-MM-dd HH:mm:ss"));
         dangZeMapper.insertUserDangZe(map);
-
         System.out.println("rate=" + rate);
         if (rate == 3) {//0表示每月一次，1表示每季度一次，2表示每年一次，3表示不限次数
             System.out.println("参加不限次数的党责活动");
             //判断是否能再插入t_dangze3_arrange
-            System.out.println("__count="+dangZeMapper.selectDangze3ArrangeCount(map));
+            System.out.println("__count=" + dangZeMapper.selectDangze3ArrangeCount(map));
             if (dangZeMapper.selectDangze3ArrangeCount(map) < count) {
                 SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
                 Date date = sdf.parse(time);
@@ -124,6 +122,138 @@ public class ActivityServiceImpl implements ActivityService {
                 map.put("time", newTime);
                 map.put("id", IDUtils.getItemId());
                 dangZeMapper.insertDangZe3Arrange(map);
+            }
+        }
+        return contentId;
+    }
+
+    @Override
+    @Transactional(rollbackFor = {Exception.class})
+    public Long saveSheZeContent(SheZeContent sheZeContent, Long shezeId, String time, Integer rate, Integer count) throws Exception {
+        activityContentMapper.insertSheZeContent(sheZeContent);
+        Long contentId = sheZeContent.getId();
+        //在t_user_sheze插入记录，state为1
+        Long userId = sheZeContent.getUserId();
+        Map<String, Object> map = new HashMap<>();
+        map.put("userId", userId);
+        map.put("shezeId", shezeId);
+        map.put("time", time);
+        map.put("year", DateUtil.getYear(new Date()));
+        map.put("state", 1);
+        map.put("rScore", 0);
+        map.put("commitTime", DateUtil.getCurrentDate("yyyy-MM-dd HH:mm:ss"));
+        sheZeMapper.insertUserSheZe(map);
+        System.out.println("rate=" + rate);
+        if (rate == 3) {//0表示每月一次，1表示每季度一次，2表示每年一次，3表示不限次数
+            System.out.println("参加不限次数的社责活动");
+            //判断是否能再插入t_sheze3_arrange
+            System.out.println("__count=" + sheZeMapper.selectSheZe3ArrangeCount(map));
+            if (sheZeMapper.selectSheZe3ArrangeCount(map) < count) {
+                SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+                Date date = sdf.parse(time);
+                String newTime = sdf.format(DateUtil.addSeconds(date, 1));
+                map.put("time", newTime);
+                map.put("id", IDUtils.getItemId());
+                sheZeMapper.insertSheZe3Arrange(map);
+            }
+        }
+        return contentId;
+    }
+
+    @Override
+    @Transactional(rollbackFor = {Exception.class})
+    public Long saveAchievementContent(AchievementContent achievementContent, Long achievementId, String time, Integer rate, Integer count) throws Exception {
+        activityContentMapper.insertAchievementContent(achievementContent);
+        Long contentId = achievementContent.getId();
+        //在t_user_achievement插入记录，state为1
+        Long userId = achievementContent.getUserId();
+        Map<String, Object> map = new HashMap<>();
+        map.put("userId", userId);
+        map.put("achievementId", achievementId);
+        map.put("time", time);
+        map.put("year", DateUtil.getYear(new Date()));
+        map.put("state", 1);
+        map.put("rScore", 0);
+        map.put("commitTime", DateUtil.getCurrentDate("yyyy-MM-dd HH:mm:ss"));
+        achievementMapper.insertUserAchievement(map);
+        System.out.println("rate=" + rate);
+        if (rate == 3) {//0表示每月一次，1表示每季度一次，2表示每年一次，3表示不限次数
+            System.out.println("参加不限次数的工作业绩活动");
+            //判断是否能再插入t_achievement3_arrange
+            System.out.println("__count=" + achievementMapper.selectAchievement3ArrangeCount(map));
+            if (achievementMapper.selectAchievement3ArrangeCount(map) < count) {
+                SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+                Date date = sdf.parse(time);
+                String newTime = sdf.format(DateUtil.addSeconds(date, 1));
+                map.put("time", newTime);
+                map.put("id", IDUtils.getItemId());
+                achievementMapper.insertAchievement3Arrange(map);
+            }
+        }
+        return contentId;
+    }
+
+    @Override
+    @Transactional(rollbackFor = {Exception.class})
+    public Long saveHonorsAwardContent(HonorsAwardContent honorsAwardContent, Long honorsAwardId, String time, Integer rate, Integer count) throws Exception {
+        activityContentMapper.insertHonorsAwardContent(honorsAwardContent);
+        Long contentId = honorsAwardContent.getId();
+        //在t_user_honorsaward插入记录，state为1
+        Long userId = honorsAwardContent.getUserId();
+        Map<String, Object> map = new HashMap<>();
+        map.put("userId", userId);
+        map.put("honorsAwardId", honorsAwardId);
+        map.put("time", time);
+        map.put("year", DateUtil.getYear(new Date()));
+        map.put("state", 1);
+        map.put("rScore", 0);
+        map.put("commitTime", DateUtil.getCurrentDate("yyyy-MM-dd HH:mm:ss"));
+        honorsAwardMapper.insertUserHonorsAward(map);
+        System.out.println("rate=" + rate);
+        if (rate == 3) {//0表示每月一次，1表示每季度一次，2表示每年一次，3表示不限次数
+            System.out.println("参加不限次数的荣誉奖励活动");
+            //判断是否能再插入t_honorsaward3_arrange
+            System.out.println("__count=" + honorsAwardMapper.selectHonorsAward3ArrangeCount(map));
+            if (honorsAwardMapper.selectHonorsAward3ArrangeCount(map) < count) {
+                SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+                Date date = sdf.parse(time);
+                String newTime = sdf.format(DateUtil.addSeconds(date, 1));
+                map.put("time", newTime);
+                map.put("id", IDUtils.getItemId());
+                honorsAwardMapper.insertHonorsAward3Arrange(map);
+            }
+        }
+        return contentId;
+    }
+
+    @Override
+    @Transactional(rollbackFor = {Exception.class})
+    public Long saveProfessDevelopContent(ProfessDevelopContent professDevelopContent, Long professdevelopId, String time, Integer rate, Integer count) throws Exception {
+        activityContentMapper.insertProfessDevelopContent(professDevelopContent);
+        Long contentId = professDevelopContent.getId();
+        //在t_user_professdevelop插入记录，state为1
+        Long userId = professDevelopContent.getUserId();
+        Map<String, Object> map = new HashMap<>();
+        map.put("userId", userId);
+        map.put("professdevelopId", professdevelopId);
+        map.put("time", time);
+        map.put("year", DateUtil.getYear(new Date()));
+        map.put("state", 1);
+        map.put("rScore", 0);
+        map.put("commitTime", DateUtil.getCurrentDate("yyyy-MM-dd HH:mm:ss"));
+        professDevelopMapper.insertUserProfessDevelop(map);
+        System.out.println("rate=" + rate);
+        if (rate == 3) {//0表示每月一次，1表示每季度一次，2表示每年一次，3表示不限次数
+            System.out.println("参加不限次数的专业提升活动");
+            //判断是否能再插入t_professdevelop3_arrange
+            System.out.println("__count=" + professDevelopMapper.selectProfessDevelop3ArrangeCount(map));
+            if (professDevelopMapper.selectProfessDevelop3ArrangeCount(map) < count) {
+                SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+                Date date = sdf.parse(time);
+                String newTime = sdf.format(DateUtil.addSeconds(date, 1));
+                map.put("time", newTime);
+                map.put("id", IDUtils.getItemId());
+                professDevelopMapper.insertProfessDevelop3Arrange(map);
             }
         }
         return contentId;

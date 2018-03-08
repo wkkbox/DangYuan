@@ -35,5 +35,53 @@
         (#{content},#{userId},#{arrangeId})
     </insert>
 
+    <insert id="insertSheZeContent" parameterType="com.telecom.jx.dangyuan.pojo.po.SheZeContent">
+        <!--持久化对象时,返回自增的主键:通用方式  -->
+        <selectKey keyColumn="id" keyProperty="id" order="AFTER"
+                   resultType="com.telecom.jx.dangyuan.pojo.po.SheZeContent">
+            SELECT LAST_INSERT_ID() AS id
+        </selectKey>
+        INSERT INTO t_sheze_content
+        (content,userId,arrangeId)
+        VALUES
+        (#{content},#{userId},#{arrangeId})
+    </insert>
+
+    <insert id="insertAchievementContent" parameterType="com.telecom.jx.dangyuan.pojo.po.AchievementContent">
+        <!--持久化对象时,返回自增的主键:通用方式  -->
+        <selectKey keyColumn="id" keyProperty="id" order="AFTER"
+                   resultType="com.telecom.jx.dangyuan.pojo.po.AchievementContent">
+            SELECT LAST_INSERT_ID() AS id
+        </selectKey>
+        INSERT INTO t_achievement_content
+        (content,userId,arrangeId)
+        VALUES
+        (#{content},#{userId},#{arrangeId})
+    </insert>
+
+    <insert id="insertHonorsAwardContent" parameterType="com.telecom.jx.dangyuan.pojo.po.HonorsAwardContent">
+        <!--持久化对象时,返回自增的主键:通用方式  -->
+        <selectKey keyColumn="id" keyProperty="id" order="AFTER"
+                   resultType="com.telecom.jx.dangyuan.pojo.po.HonorsAwardContent">
+            SELECT LAST_INSERT_ID() AS id
+        </selectKey>
+        INSERT INTO t_honorsaward_content
+        (content,userId,arrangeId)
+        VALUES
+        (#{content},#{userId},#{arrangeId})
+    </insert>
+
+    <insert id="insertProfessDevelopContent" parameterType="com.telecom.jx.dangyuan.pojo.po.ProfessDevelopContent">
+        <!--持久化对象时,返回自增的主键:通用方式  -->
+        <selectKey keyColumn="id" keyProperty="id" order="AFTER"
+                   resultType="com.telecom.jx.dangyuan.pojo.po.ProfessDevelopContent">
+            SELECT LAST_INSERT_ID() AS id
+        </selectKey>
+        INSERT INTO t_professdevelop_content
+        (content,userId,arrangeId)
+        VALUES
+        (#{content},#{userId},#{arrangeId})
+    </insert>
+
 
 </mapper>

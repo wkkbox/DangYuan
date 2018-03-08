@@ -1,7 +1,6 @@
 package com.telecom.jx.dangyuan.controller;
 
-import com.telecom.jx.dangyuan.pojo.po.ActivityAttachment;
-import com.telecom.jx.dangyuan.pojo.po.DangZeContent;
+import com.telecom.jx.dangyuan.pojo.po.*;
 import com.telecom.jx.dangyuan.pojo.vo.*;
 import com.telecom.jx.dangyuan.service.ActivityService;
 import com.telecom.jx.dangyuan.service.ActivityAttachmentService;
@@ -101,11 +100,16 @@ public class ActivityController {
      * 上传完成的党责活动的活动记录
      *
      * @param dangZeContent
+     * @param dangzeId
+     * @param time
+     * @param rate
+     * @param dScore
+     * @param sumScore
      * @return
      */
     @ResponseBody
     @RequestMapping(value = {"/dangzeContent"}, produces = "application/json;charset=utf-8")
-    public String saveActivityContent(DangZeContent dangZeContent, Long dangzeId, String time, Integer rate, Integer dScore, Integer sumScore) {
+    public String saveDangZeContent(DangZeContent dangZeContent, Long dangzeId, String time, Integer rate, Integer dScore, Integer sumScore) {
         System.out.println("dangzeContent = " + dangZeContent);
         System.out.println("dangzeId=" + dangzeId);
         System.out.println("time=" + time);
@@ -119,6 +123,130 @@ public class ActivityController {
         } catch (Exception e) {
             e.printStackTrace();
             result = new MessageResult(false, "提交党责活动记录失败", null);
+        }
+        return JsonUtils.objectToJson(result);
+    }
+
+    /**
+     * 上传完成的社责活动的活动记录
+     *
+     * @param sheZeContent
+     * @param shezeId
+     * @param time
+     * @param rate
+     * @param dScore
+     * @param sumScore
+     * @return
+     */
+    @ResponseBody
+    @RequestMapping(value = {"/shezeContent"}, produces = "application/json;charset=utf-8")
+    public String saveSheZeContent(SheZeContent sheZeContent, Long shezeId, String time, Integer rate, Integer dScore, Integer sumScore) {
+        System.out.println("sheZeContent = " + sheZeContent);
+        System.out.println("shezeId=" + shezeId);
+        System.out.println("time=" + time);
+        System.out.println("rate=" + rate);
+        System.out.println("dScore" + dScore);
+        System.out.println("sumScore" + sumScore);
+        MessageResult result = null;
+        try {
+            Long sheZeContentId = activityService.saveSheZeContent(sheZeContent, shezeId, time, rate, sumScore / dScore);
+            result = new MessageResult(true, "提交社责活动记录成功", sheZeContentId);
+        } catch (Exception e) {
+            e.printStackTrace();
+            result = new MessageResult(false, "提交社责活动记录失败", null);
+        }
+        return JsonUtils.objectToJson(result);
+    }
+
+    /**
+     * 上传完成的工作业绩活动的活动记录
+     *
+     * @param achievementContent
+     * @param achievementId
+     * @param time
+     * @param rate
+     * @param dScore
+     * @param sumScore
+     * @return
+     */
+    @ResponseBody
+    @RequestMapping(value = {"/achievementContent"}, produces = "application/json;charset=utf-8")
+    public String saveAchievementContent(AchievementContent achievementContent, Long achievementId, String time, Integer rate, Integer dScore, Integer sumScore) {
+        System.out.println("achievementContent = " + achievementContent);
+        System.out.println("achievementId=" + achievementId);
+        System.out.println("time=" + time);
+        System.out.println("rate=" + rate);
+        System.out.println("dScore" + dScore);
+        System.out.println("sumScore" + sumScore);
+        MessageResult result = null;
+        try {
+            Long achievementContentId = activityService.saveAchievementContent(achievementContent, achievementId, time, rate, sumScore / dScore);
+            result = new MessageResult(true, "提交工作业绩活动记录成功", achievementContentId);
+        } catch (Exception e) {
+            e.printStackTrace();
+            result = new MessageResult(false, "提交工作业绩活动记录失败", null);
+        }
+        return JsonUtils.objectToJson(result);
+    }
+
+    /**
+     * 上传完成的荣誉奖励活动的活动记录
+     *
+     * @param honorsAwardContent
+     * @param honorsAwardId
+     * @param time
+     * @param rate
+     * @param dScore
+     * @param sumScore
+     * @return
+     */
+    @ResponseBody
+    @RequestMapping(value = {"/honorsAwardContent"}, produces = "application/json;charset=utf-8")
+    public String saveHonorsAwardContent(HonorsAwardContent honorsAwardContent, Long honorsAwardId, String time, Integer rate, Integer dScore, Integer sumScore) {
+        System.out.println("honorsAwardContent = " + honorsAwardContent);
+        System.out.println("honorsAwardId=" + honorsAwardId);
+        System.out.println("time=" + time);
+        System.out.println("rate=" + rate);
+        System.out.println("dScore" + dScore);
+        System.out.println("sumScore" + sumScore);
+        MessageResult result = null;
+        try {
+            Long honorsAwardContentId = activityService.saveHonorsAwardContent(honorsAwardContent, honorsAwardId, time, rate, sumScore / dScore);
+            result = new MessageResult(true, "提交荣誉奖励活动记录成功", honorsAwardContentId);
+        } catch (Exception e) {
+            e.printStackTrace();
+            result = new MessageResult(false, "提交荣誉奖励活动记录失败", null);
+        }
+        return JsonUtils.objectToJson(result);
+    }
+
+    /**
+     * 上传完成的专业提升活动的活动记录
+     *
+     * @param professDevelopContent
+     * @param professdevelopId
+     * @param time
+     * @param rate
+     * @param dScore
+     * @param sumScore
+     * @return
+     */
+    @ResponseBody
+    @RequestMapping(value = {"/professDevelopContent"}, produces = "application/json;charset=utf-8")
+    public String saveProfessDevelopContent(ProfessDevelopContent professDevelopContent, Long professdevelopId, String time, Integer rate, Integer dScore, Integer sumScore) {
+        System.out.println("professDevelopContent = " + professDevelopContent);
+        System.out.println("professdevelopId=" + professdevelopId);
+        System.out.println("time=" + time);
+        System.out.println("rate=" + rate);
+        System.out.println("dScore" + dScore);
+        System.out.println("sumScore" + sumScore);
+        MessageResult result = null;
+        try {
+            Long professDevelopContentId = activityService.saveProfessDevelopContent(professDevelopContent, professdevelopId, time, rate, sumScore / dScore);
+            result = new MessageResult(true, "提交专业提升活动记录成功", professDevelopContentId);
+        } catch (Exception e) {
+            e.printStackTrace();
+            result = new MessageResult(false, "提交专业提升活动记录失败", null);
         }
         return JsonUtils.objectToJson(result);
     }
