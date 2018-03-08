@@ -2,7 +2,7 @@ package com.telecom.jx.dangyuan.controller;
 
 import com.telecom.jx.dangyuan.pojo.po.ActivityAttachment;
 import com.telecom.jx.dangyuan.pojo.po.DangZeContent;
-import com.telecom.jx.dangyuan.pojo.vo.DangZeCustom;
+import com.telecom.jx.dangyuan.pojo.vo.*;
 import com.telecom.jx.dangyuan.service.ActivityService;
 import com.telecom.jx.dangyuan.service.ActivityAttachmentService;
 import com.telecom.jx.dangyuan.service.UserService;
@@ -31,7 +31,7 @@ public class ActivityController {
     private ActivityAttachmentService activityAttachmentService;
 
     /**
-     * 查询本用户当月所有活动，0表示党责活动
+     * 查询本用户当月所有活动，0表示党责，1表示社责，2表示工作业绩，3表示荣誉奖励，4表示专业提升
      *
      * @param userId
      * @param activityType
@@ -59,6 +59,34 @@ public class ActivityController {
                     System.out.println("dangZeCustoms:" + dangZeCustoms);
                     result = new MessageResult(true, "查询成功", dangZeCustoms);
                     //System.out.println("currentUser=" + SecurityUtils.getSubject().getSession().getAttribute("currentUser"));
+                    break;
+                //1是社责
+                case 1:
+                    List<SheZeCustom> sheZeCustoms = null;
+                    sheZeCustoms = activityService.getSheZeCustoms(userId);
+                    System.out.println("sheZeCustoms:" + sheZeCustoms);
+                    result = new MessageResult(true, "查询成功", sheZeCustoms);
+                    break;
+                //2是工作业绩
+                case 2:
+                    List<AchievementCustom> achievementCustoms = null;
+                    achievementCustoms = activityService.getAchievementCustoms(userId);
+                    System.out.println("achievementCustoms:" + achievementCustoms);
+                    result = new MessageResult(true, "查询成功", achievementCustoms);
+                    break;
+                //3是荣誉奖励
+                case 3:
+                    List<HonorsAwardCustom> honorsAwardCustoms = null;
+                    honorsAwardCustoms = activityService.getHonorsAwardCustoms(userId);
+                    System.out.println("honorsAwardCustoms:" + honorsAwardCustoms);
+                    result = new MessageResult(true, "查询成功", honorsAwardCustoms);
+                    break;
+                //4是专业提升
+                case 4:
+                    List<ProfessDevelopCustom> professDevelopCustoms = null;
+                    professDevelopCustoms = activityService.getProfessDevelopCustoms(userId);
+                    System.out.println("professDevelopCustoms:" + professDevelopCustoms);
+                    result = new MessageResult(true, "查询成功", professDevelopCustoms);
                     break;
                 //其余活动之后再写
             }

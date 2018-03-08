@@ -4,10 +4,10 @@ import com.telecom.jx.dangyuan.pojo.po.ActivityAttachment;
 
 import java.util.List;
 
-public class DangZeCustom {
+public class ProfessDevelopCustom {
 
-    private String title;//党责标题
-    private String content;//党责内容
+    private String title;//专业提升标题
+    private String content;//专业提升内容
     private Long roleId;//所属用户角色
     private Integer dScore;//固定得分，1，2，3...
     private Integer lScore;//最低得分
@@ -16,12 +16,13 @@ public class DangZeCustom {
     private Integer sumScore;//累计可得最高分
     private String month;//月份
     private String time;//时间
-    private Long dangzeId;//党责id
+    private Long professdevelopId;//专业提升id
     private Integer state;//状态，申请是0，申请中是1，完成是2，默认状态为0
     private Integer rScore;//真实得分，默认为0
     private String commitContent;//用户提交内容
     private List<ActivityAttachment> attachmentList;//附件
-    private Long arrangeId;//党责安排表主键
+    private Long arrangeId;//专业提升安排表主键
+    private Integer otherAttr;//其他属性，1表示国家级，2表示省部级，3表示地市级，4表示集团（中央企业）级，5表示省公司级，6表示市公司级
 
     //private String commitTime;//党员提交时间
     //private String finishTime;//管理员审核通过时间
@@ -148,11 +149,19 @@ public class DangZeCustom {
         this.attachmentList = attachmentList;
     }
 
-    public Long getDangzeId() {
-        return dangzeId;
+    public Integer getOtherAttr() {
+        return otherAttr;
     }
 
-    public void setDangzeId(Long dangzeId) {
-        this.dangzeId = dangzeId;
+    public void setOtherAttr(Integer otherAttr) {
+        this.otherAttr = otherAttr;
+    }
+
+    public Long getProfessdevelopId() {
+        return professdevelopId;
+    }
+
+    public void setProfessdevelopId(Long professdevelopId) {
+        this.professdevelopId = professdevelopId;
     }
 }

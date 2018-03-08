@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.telecom.jx.dangyuan.mapper.DangZeMapper">
+<mapper namespace="com.telecom.jx.dangyuan.mapper.AchievementMapper">
 
     <!--注意字段要和javabean的一样-->
     <sql id="baseSql">
@@ -17,14 +17,14 @@
         d.sumScore sumScore
     </sql>
 
-    <sql id="dangZeCustomBaseSql">
+    <sql id="achievementCustomBaseSql">
         d_a.id arrangeId,d_a.month month,d_a.time time,d_a.dangzeId dangzeId,
-        d.title title,d.content content,d.roleId roleId,d.dScore dScore,d.lScore lScore,d.hScore hScore,d.rate rate,d.sumScore
+        d.title title,d.content content,d.roleId roleId,d.dScore dScore,d.lScore lScore,d.hScore hScore,d.rate rate,d.otherAttr otherAttr,d.sumScore
     </sql>
 
-    <sql id="dangZe3CustomBaseSql">
+    <sql id="achievement3CustomBaseSql">
         d3_a.id arrangeId,d3_a.time time,d3_a.dangzeId dangzeId,
-        d.title title,d.content content,d.roleId roleId,d.dScore dScore,d.lScore lScore,d.hScore hScore,d.rate rate,d.sumScore
+        d.title title,d.content content,d.roleId roleId,d.dScore dScore,d.lScore lScore,d.hScore hScore,d.rate rate,d.otherAttr otherAttr,d.sumScore
     </sql>
 
     <!--查询用户所有党责活动,未使用-->
@@ -36,50 +36,50 @@
     </select>
 
     <!--查询用户当月所有党责活动(有次数的，rate=0，1，2)-->
-    <select id="selectDangZeCustoms" parameterType="java.util.Map"
-            resultType="com.telecom.jx.dangyuan.pojo.vo.DangZeCustom">
+    <select id="selectAchievementCustoms" parameterType="java.util.Map"
+            resultType="com.telecom.jx.dangyuan.pojo.vo.AchievementCustom">
         SELECT
-        <include refid="dangZeCustomBaseSql"/>
-        FROM t_dangze_arrange d_a
-        LEFT JOIN t_dangze d
-        ON d.id = d_a.dangzeId
-        LEFT JOIN t_dangze_content d_c
+        <include refid="achievementCustomBaseSql"/>
+        FROM t_achievement_arrange d_a
+        LEFT JOIN t_achievement d
+        ON d.id = d_a.achievementId
+        LEFT JOIN t_achievement_content d_c
         ON d_a.id = d_c.arrangeId
         WHERE d_a.month = #{month}
     </select>
 
     <!--查询用户所有党责活动(不限次数的，rate=3)-->
-    <select id="selectDangZe3Customs" parameterType="java.util.Map"
-            resultType="com.telecom.jx.dangyuan.pojo.vo.DangZeCustom">
+    <select id="selectAchievement3Customs" parameterType="java.util.Map"
+            resultType="com.telecom.jx.dangyuan.pojo.vo.AchievementCustom">
         SELECT
-        <include refid="dangZe3CustomBaseSql"/>
-        FROM t_dangze3_arrange d3_a
-        LEFT JOIN t_dangze d
-        ON d.id = d3_a.dangzeId
-        LEFT JOIN t_dangze_content d_c
+        <include refid="achievement3CustomBaseSql"/>
+        FROM t_achievement3_arrange d3_a
+        LEFT JOIN t_achievement d
+        ON d.id = d3_a.achievementId
+        LEFT JOIN t_achievement_content d_c
         ON d3_a.id = d_c.arrangeId
         WHERE d3_a.year = #{year} and d3_a.userId = #{userId}
     </select>
 
     <!--查询党责活动的完成状态，申请是0，申请中是1，完成是2-->
-    <select id="selectDangZeState" parameterType="java.util.Map" resultType="java.lang.Integer">
+    <select id="selectAchievementState" parameterType="java.util.Map" resultType="java.lang.Integer">
         SELECT u_d.state state
-        FROM t_user_dangze u_d
-        WHERE u_d.userId = #{userId} AND u_d.dangzeId = #{dangzeId} AND u_d.time = #{time} AND u_d.year = #{year}
+        FROM t_user_achievement u_d
+        WHERE u_d.userId = #{userId} AND u_d.achievementId = #{achievementId} AND u_d.time = #{time} AND u_d.year = #{year}
     </select>
 
-    <select id="selectDangZeAttachmentByArrangeIdAndUserId" parameterType="java.util.Map"
+    <select id="selectAchievementAttachmentByArrangeIdAndUserId" parameterType="java.util.Map"
             resultType="com.telecom.jx.dangyuan.pojo.po.ActivityAttachment">
         SELECT a_a.id id,a_a.localAddress localAddress,a_a.serverAddress serverAddress,a_a.attachmentType attachmentType,a_a.uploadTime uploadTime,a_a.contentId contentId,a_a.activityType activityType
         FROM t_activity_attachment a_a
-        LEFT JOIN t_dangze_content d_c
+        LEFT JOIN t_achievement_content d_c
         ON d_c.id = a_a.contentId
         WHERE d_c.arrangeId = #{arrangeId} and d_c.userId = #{userId}
     </select>
 
-    <select id="selectDangZeContentByArrangeIdAndUserId" parameterType="java.util.Map" resultType="java.lang.String">
+    <select id="selectAchievementContentByArrangeIdAndUserId" parameterType="java.util.Map" resultType="java.lang.String">
         SELECT d_c.content
-        FROM t_dangze_content d_c
+        FROM t_achievement_content d_c
         WHERE d_c.userId = #{userId} AND d_c.arrangeId = #{arrangeId}
     </select>
 

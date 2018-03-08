@@ -3,7 +3,7 @@ package com.telecom.jx.dangyuan.pojo.vo;
 import java.io.Serializable;
 
 /**
- * 积分实体
+ * 积分实体(视图)
  */
 public class Score implements Serializable {
 
