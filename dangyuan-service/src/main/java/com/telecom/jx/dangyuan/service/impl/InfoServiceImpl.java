@@ -34,7 +34,7 @@ public class InfoServiceImpl implements InfoService {
         map.put("roleId", roleId);
         map.put("currentPage", (currentPage - 1) * pageSize);
         map.put("pageSize", pageSize);
-        map.put("year", DateUtil.getYear(new Date()));
+        map.put("year", Long.valueOf(DateUtil.getYear(new Date())));
         //消息总数
         Integer count = infoMapper.selectInfoSize(map);
         //查询本用户所有消息集合

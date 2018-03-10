@@ -11,6 +11,7 @@ public class ProfessDevelopContent implements Serializable {
     private String content;//活动记录内容
     private Long userId;//活动记录所属用户id
     private Long arrangeId;//活动记录所属活动安排(例如专业提升安排)表id
+    private String year;//年份
 
     @Override
     public String toString() {
@@ -47,5 +48,13 @@ public class ProfessDevelopContent implements Serializable {
 
     public void setArrangeId(Long arrangeId) {
         this.arrangeId = arrangeId;
+    }
+
+    public String getYear() {
+        return year;
+    }
+
+    public void setYear(String year) {
+        this.year = year;
     }
 }

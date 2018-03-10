@@ -39,7 +39,7 @@ public class CryptographyUtil {
 
     public static void main(String[] args) {
         String password = "Ad123@min";
-        String password2 = "123456";
+        String password2 = "654321";
         System.out.println("Base64加密" + CryptographyUtil.encBase64(password));
         System.out.println("Base64解密" + CryptographyUtil.decBase64(CryptographyUtil.encBase64(password)));
 

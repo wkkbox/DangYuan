@@ -26,4 +26,6 @@ public interface UserService {
     PageBean<Score> getScorePublicityByPage(Integer currentPage, Integer pageSize) throws Exception;
 
     Long getUserHighRoleByUserId(Long userId) throws Exception;
+
+    void editPassword(Long userId, String newPwd) throws Exception;
 }

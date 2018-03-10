@@ -19,12 +19,12 @@
     </sql>
 
     <sql id="professDevelopCustomBaseSql">
-        d_a.id arrangeId,d_a.month month,d_a.time time,d_a.dangzeId dangzeId,
+        d_a.id arrangeId,d_a.month month,d_a.time time,d_a.professdevelopId professdevelopId,
         d.title title,d.content content,d.roleId roleId,d.dScore dScore,d.lScore lScore,d.hScore hScore,d.rate rate,d.otherAttr otherAttr,d.sumScore
     </sql>
 
     <sql id="professDevelop3CustomBaseSql">
-        d3_a.id arrangeId,d3_a.time time,d3_a.dangzeId dangzeId,
+        d3_a.id arrangeId,d3_a.time time,d3_a.professdevelopId professdevelopId,
         d.title title,d.content content,d.roleId roleId,d.dScore dScore,d.lScore lScore,d.hScore hScore,d.rate rate,d.otherAttr otherAttr,d.sumScore
     </sql>
 
@@ -77,7 +77,7 @@
     </select>
 
     <insert id="insertUserProfessDevelop" parameterType="java.util.Map">
-        INSERT INTO t_user_dangze(userId,professdevelopId,time,year,state,rScore,commitTime)
+        INSERT INTO t_user_professdevelop(userId,professdevelopId,time,year,state,rScore,commitTime)
         VALUES (#{userId},#{professdevelopId},#{time},#{year},#{state},#{rScore},#{commitTime})
     </insert>
 

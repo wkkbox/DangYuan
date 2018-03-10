@@ -19,12 +19,12 @@
     </sql>
 
     <sql id="honorsAwardCustomBaseSql">
-        d_a.id arrangeId,d_a.month month,d_a.time time,d_a.dangzeId dangzeId,
+        d_a.id arrangeId,d_a.month month,d_a.time time,d_a.honorsAwardId honorsAwardId,
         d.title title,d.content content,d.roleId roleId,d.dScore dScore,d.lScore lScore,d.hScore hScore,d.rate rate,d.otherAttr otherAttr,d.sumScore
     </sql>
 
     <sql id="honorsAward3CustomBaseSql">
-        d3_a.id arrangeId,d3_a.time time,d3_a.dangzeId dangzeId,
+        d3_a.id arrangeId,d3_a.time time,d3_a.honorsAwardId honorsAwardId,
         d.title title,d.content content,d.roleId roleId,d.dScore dScore,d.lScore lScore,d.hScore hScore,d.rate rate,d.otherAttr otherAttr,d.sumScore
     </sql>
 

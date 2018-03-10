@@ -5,6 +5,7 @@ import com.telecom.jx.dangyuan.pojo.vo.*;
 import com.telecom.jx.dangyuan.service.ActivityService;
 import com.telecom.jx.dangyuan.service.ActivityAttachmentService;
 import com.telecom.jx.dangyuan.service.UserService;
+import com.telecom.jx.dangyuan.util.DateUtil;
 import com.telecom.jx.dangyuan.util.JsonUtils;
 import com.telecom.jx.dangyuan.util.dto.MessageResult;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.util.Date;
 import java.util.List;
 
 
@@ -118,6 +120,7 @@ public class ActivityController {
         System.out.println("sumScore" + sumScore);
         MessageResult result = null;
         try {
+            dangZeContent.setYear(String.valueOf(DateUtil.getYear(new Date())));
             Long dangZeContentId = activityService.saveDangZeContent(dangZeContent, dangzeId, time, rate, sumScore / dScore);
             result = new MessageResult(true, "提交党责活动记录成功", dangZeContentId);
         } catch (Exception e) {
@@ -149,6 +152,7 @@ public class ActivityController {
         System.out.println("sumScore" + sumScore);
         MessageResult result = null;
         try {
+            sheZeContent.setYear(String.valueOf(DateUtil.getYear(new Date())));
             Long sheZeContentId = activityService.saveSheZeContent(sheZeContent, shezeId, time, rate, sumScore / dScore);
             result = new MessageResult(true, "提交社责活动记录成功", sheZeContentId);
         } catch (Exception e) {
@@ -180,6 +184,7 @@ public class ActivityController {
         System.out.println("sumScore" + sumScore);
         MessageResult result = null;
         try {
+            achievementContent.setYear(String.valueOf(DateUtil.getYear(new Date())));
             Long achievementContentId = activityService.saveAchievementContent(achievementContent, achievementId, time, rate, sumScore / dScore);
             result = new MessageResult(true, "提交工作业绩活动记录成功", achievementContentId);
         } catch (Exception e) {
@@ -211,6 +216,7 @@ public class ActivityController {
         System.out.println("sumScore" + sumScore);
         MessageResult result = null;
         try {
+            honorsAwardContent.setYear(String.valueOf(DateUtil.getYear(new Date())));
             Long honorsAwardContentId = activityService.saveHonorsAwardContent(honorsAwardContent, honorsAwardId, time, rate, sumScore / dScore);
             result = new MessageResult(true, "提交荣誉奖励活动记录成功", honorsAwardContentId);
         } catch (Exception e) {
@@ -242,6 +248,7 @@ public class ActivityController {
         System.out.println("sumScore" + sumScore);
         MessageResult result = null;
         try {
+            professDevelopContent.setYear(String.valueOf(DateUtil.getYear(new Date())));
             Long professDevelopContentId = activityService.saveProfessDevelopContent(professDevelopContent, professdevelopId, time, rate, sumScore / dScore);
             result = new MessageResult(true, "提交专业提升活动记录成功", professDevelopContentId);
         } catch (Exception e) {

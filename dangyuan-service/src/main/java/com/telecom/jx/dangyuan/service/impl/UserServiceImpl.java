@@ -5,10 +5,12 @@ import com.telecom.jx.dangyuan.mapper.UserMapper;
 import com.telecom.jx.dangyuan.pojo.po.User;
 import com.telecom.jx.dangyuan.pojo.vo.Score;
 import com.telecom.jx.dangyuan.service.UserService;
+import com.telecom.jx.dangyuan.util.CryptographyUtil;
 import com.telecom.jx.dangyuan.util.dto.Menu;
 import com.telecom.jx.dangyuan.util.dto.PageBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.*;
 
@@ -77,5 +79,14 @@ public class UserServiceImpl implements UserService {
         } else {
             return Collections.min(roleIds);
         }
+    }
+
+    @Override
+    @Transactional(rollbackFor = {Exception.class})
+    public void editPassword(Long userId, String newPwd) throws Exception {
+        Map<String,Object> map = new HashMap<>();
+        map.put("userId",userId);
+        map.put("password",CryptographyUtil.md5(newPwd, "dangyuan", 2));
+        userMapper.updatePassword(map);
     }
 }

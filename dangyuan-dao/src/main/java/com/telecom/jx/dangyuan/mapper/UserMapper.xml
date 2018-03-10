@@ -28,6 +28,12 @@
         u.isWork isWork
     </sql>
 
+    <update id="updatePassword">
+        UPDATE t_user
+        SET password=#{password}
+        WHERE id=#{userId}
+    </update>
+
     <!--查询所有积分公示，在视图中-->
     <select id="selectScorePublicity" resultType="com.telecom.jx.dangyuan.pojo.vo.Score">
         SELECT id,userName,gender,score,branch

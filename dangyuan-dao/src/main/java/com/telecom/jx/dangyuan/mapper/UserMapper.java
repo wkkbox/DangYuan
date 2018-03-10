@@ -9,23 +9,25 @@ import java.util.Map;
 import java.util.Set;
 
 public interface UserMapper {
-    List<User> listUsers() throws Exception;
+    List<User> listUsers();
 
-    List<User> selectUserByUserName(String userName) throws Exception;
+    List<User> selectUserByUserName(String userName);
 
-    User selectUserByAccountName(String accountName) throws Exception;
+    User selectUserByAccountName(String accountName);
 
-    List<String> selectUserRolesByUserId(Long userId) throws Exception;
+    List<String> selectUserRolesByUserId(Long userId);
 
-    List<Long> selectUserRoleIdsByUserId(Long userId) throws Exception;
+    List<Long> selectUserRoleIdsByUserId(Long userId);
 
-    List<String> selectUserPermissionsByUserId(Long userId) throws Exception;
+    List<String> selectUserPermissionsByUserId(Long userId);
 
-    List<Menu> selectMenusByUserId(Long userId) throws Exception;
+    List<Menu> selectMenusByUserId(Long userId);
 
-    List<Score> selectScorePublicity() throws Exception;
+    List<Score> selectScorePublicity();
 
-    Integer selectScorePublicitySize() throws Exception;
+    Integer selectScorePublicitySize();
 
-    List<Score> selectScorePublicityByPage(Map<String, Object> map) throws Exception;
+    List<Score> selectScorePublicityByPage(Map<String, Object> map);
+
+    void updatePassword(Map<String, Object> map);
 }

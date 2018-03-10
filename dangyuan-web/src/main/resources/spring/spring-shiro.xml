@@ -44,6 +44,7 @@
                 <!-- 静态资源允许访问 -->
                 / = anon
                 /user/login = anon
+                /user/editPassword = anon
                 <!-- 其他资源需要认证 authc -->
                 /** = authc
             </value>

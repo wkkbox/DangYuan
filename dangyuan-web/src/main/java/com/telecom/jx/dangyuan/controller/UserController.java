@@ -5,6 +5,7 @@ import com.telecom.jx.dangyuan.pojo.po.User;
 import com.telecom.jx.dangyuan.pojo.vo.Score;
 import com.telecom.jx.dangyuan.service.InfoService;
 import com.telecom.jx.dangyuan.service.UserService;
+import com.telecom.jx.dangyuan.util.CryptographyUtil;
 import com.telecom.jx.dangyuan.util.DateUtil;
 import com.telecom.jx.dangyuan.util.JsonUtils;
 import com.telecom.jx.dangyuan.util.dto.MessageResult;
@@ -93,6 +94,35 @@ public class UserController {
 
         //登录成功
         return JsonUtils.objectToJson(new MessageResult(true, "登录成功", currentUser));
+    }
+
+    @ResponseBody
+    @RequestMapping(value = {"/editPassword"}, produces = "application/json;charset=utf-8")
+    public String editPassword(String oldPwd, String newPwd, String accountName) {
+        MessageResult result = null;
+        User currentUser = null;
+        try {
+            currentUser = userService.getUserByAccountName(accountName);
+            if(currentUser==null){
+                result = new MessageResult(false, "帐户名错误", null);
+            }else {
+                if(!currentUser.getPassword().equals(CryptographyUtil.md5(oldPwd, "dangyuan", 2))){
+                    result = new MessageResult(false, "原密码输入错误", null);
+                }else {
+                    try {
+                        System.out.println("currentUser.getId()=" + currentUser.getId());
+                        userService.editPassword(currentUser.getId(), newPwd);
+                        result = new MessageResult(true, "密码修改成功", null);
+                    } catch (Exception e) {
+                        result = new MessageResult(false, "密码修改失败", null);
+                        e.printStackTrace();
+                    }
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return JsonUtils.objectToJson(result);
     }
 
     /**
