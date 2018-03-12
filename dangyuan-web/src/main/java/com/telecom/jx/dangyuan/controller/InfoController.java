@@ -36,6 +36,8 @@ public class InfoController {
         MessageResult result = null;
         PageBean<Info> infoPage = null;
         try {
+            System.out.println("currentPage=" + currentPage);
+            System.out.println("pageSize=" + pageSize);
             //id值越小角色权限越高
             Long roleId = userService.getUserHighRoleByUserId(userId);
             infoPage = infoService.getInfos(userId, roleId, currentPage, pageSize);
@@ -49,6 +51,7 @@ public class InfoController {
 
     /**
      * 消息详情查看
+     *
      * @param infoId
      * @return
      */

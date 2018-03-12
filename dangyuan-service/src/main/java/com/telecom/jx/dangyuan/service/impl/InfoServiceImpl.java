@@ -37,6 +37,7 @@ public class InfoServiceImpl implements InfoService {
         map.put("year", Long.valueOf(DateUtil.getYear(new Date())));
         //消息总数
         Integer count = infoMapper.selectInfoSize(map);
+        System.out.println("count=" + count);
         //查询本用户所有消息集合
         List<Info> infoList = infoMapper.selectInfoByPage(map);
         //查询本用户未读消息id集合
@@ -46,7 +47,7 @@ public class InfoServiceImpl implements InfoService {
         for (Info item : infoList) {
             if (!unReadInfoIds.contains(item.getId())) {
                 item.setState(1);
-            }else {
+            } else {
                 item.setState(0);
             }
         }
