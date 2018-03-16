@@ -83,6 +83,13 @@
         WHERE d_c.userId = #{userId} AND d_c.arrangeId = #{arrangeId}
     </select>
 
+    <!---->
+    <select id="selectDangZeContentIdByArrangeIdAndUserId" parameterType="java.util.Map" resultType="java.lang.Long">
+        SELECT d_c.id
+        FROM t_dangze_content d_c
+        WHERE d_c.userId = #{userId} AND d_c.arrangeId = #{arrangeId}
+    </select>
+
     <insert id="insertUserDangZe" parameterType="java.util.Map">
         INSERT INTO t_user_dangze(userId,dangzeId,time,year,state,rScore,commitTime)
         VALUES (#{userId},#{dangzeId},#{time},#{year},#{state},#{rScore},#{commitTime})
@@ -98,6 +105,24 @@
         SELECT count(1) count
         FROM t_dangze3_arrange d3_a
         WHERE d3_a.year = #{year} AND d3_a.userId = #{userId} AND d3_a.dangzeId = #{dangzeId}
+    </select>
+
+    <update id="updateDangZeContent" parameterType="java.util.Map">
+        UPDATE t_dangze_content
+        SET content=#{dangzeContent}
+        WHERE id=#{contentId}
+    </update>
+
+    <update id="updateDangZeState" parameterType="java.util.Map">
+        UPDATE t_user_dangze
+        SET state=1
+        WHERE userId=#{userId} and time=#{time} and dangzeId=#{dangzeId}
+    </update>
+
+    <select id="selectDangZeScore" parameterType="java.util.Map" resultType="java.lang.Integer">
+        SELECT SUM(rScore)
+        FROM t_user_dangze
+        WHERE userId=#{userId} AND year=#{year};
     </select>
 
 </mapper>

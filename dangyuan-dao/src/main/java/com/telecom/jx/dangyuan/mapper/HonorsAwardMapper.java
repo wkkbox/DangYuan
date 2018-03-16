@@ -23,4 +23,12 @@ public interface HonorsAwardMapper {
     List<HonorsAwardCustom> selectHonorsAward3Customs(Map<String, Object> map) throws Exception;
 
     Integer selectHonorsAward3ArrangeCount(Map<String, Object> map) throws Exception;
+
+    Long selectHonorsAwardContentIdByArrangeIdAndUserId(Map<String, Object> map);
+
+    void updateHonorsAwardContent(Map<String, Object> map);
+
+    void updateHonorsAwardState(Map<String, Object> map);
+
+    Integer selectHonorsAwardScore(Map<String, Object> scoreMap);
 }

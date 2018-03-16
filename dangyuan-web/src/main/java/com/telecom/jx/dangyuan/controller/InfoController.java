@@ -36,9 +36,9 @@ public class InfoController {
         MessageResult result = null;
         PageBean<Info> infoPage = null;
         try {
-            System.out.println("currentPage=" + currentPage);
-            System.out.println("pageSize=" + pageSize);
             //id值越小角色权限越高
+            System.out.println("currentpage="+currentPage);
+            System.out.println("pageSize="+pageSize);
             Long roleId = userService.getUserHighRoleByUserId(userId);
             infoPage = infoService.getInfos(userId, roleId, currentPage, pageSize);
             result = new MessageResult(true, "查询成功", infoPage);
@@ -51,17 +51,16 @@ public class InfoController {
 
     /**
      * 消息详情查看
-     *
      * @param infoId
      * @return
      */
     @ResponseBody
     @RequestMapping(value = {"/infoDetail"}, produces = "application/json;charset=utf-8")
-    public String infoDetail(Long infoId) {
+    public String infoDetail(Long infoId,Long userId) {
         MessageResult result = null;
         Info info = null;
         try {
-            info = infoService.getInfoByInfoId(infoId);
+            info = infoService.getInfoByInfoId(infoId,userId);
             result = new MessageResult(true, "查询成功", info);
         } catch (Exception e) {
             e.printStackTrace();

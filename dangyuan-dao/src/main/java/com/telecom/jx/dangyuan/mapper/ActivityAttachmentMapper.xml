@@ -19,5 +19,10 @@
         (#{localAddress},#{serverAddress},#{attachmentType},#{uploadTime},#{contentId},#{activityType})
     </insert>
 
+    <delete id="deleteAttachmentByContentIdAndActivityType" parameterType="java.util.Map">
+        DELETE FROM t_activity_attachment
+        WHERE contentId=#{contentId} and activityType=#{activityType}
+    </delete>
+
 
 </mapper>

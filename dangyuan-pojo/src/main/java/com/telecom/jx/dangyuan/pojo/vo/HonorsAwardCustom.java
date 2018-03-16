@@ -19,6 +19,7 @@ public class HonorsAwardCustom {
     private Long honorsAwardId;//荣誉奖励id
     private Integer state;//状态，申请是0，申请中是1，完成是2，默认状态为0
     private Integer rScore;//真实得分，默认为0
+    private Long contentId;//content表主键
     private String commitContent;//用户提交内容
     private List<ActivityAttachment> attachmentList;//附件
     private Long arrangeId;//荣誉奖励安排表主键
@@ -163,5 +164,13 @@ public class HonorsAwardCustom {
 
     public void setHonorsAwardId(Long honorsAwardId) {
         this.honorsAwardId = honorsAwardId;
+    }
+
+    public Long getContentId() {
+        return contentId;
+    }
+
+    public void setContentId(Long contentId) {
+        this.contentId = contentId;
     }
 }

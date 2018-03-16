@@ -8,21 +8,29 @@ import java.util.List;
 import java.util.Map;
 
 public interface DangZeMapper {
-    List<DangZe> selectDangZes(Long roleId) throws Exception;
+    List<DangZe> selectDangZes(Long roleId);
 
-    List<DangZeCustom> selectDangZeCustoms(Map<String, Object> map) throws Exception;
+    List<DangZeCustom> selectDangZeCustoms(Map<String, Object> map);
 
-    Integer selectDangZeState(Map<String, Object> map) throws Exception;
+    Integer selectDangZeState(Map<String, Object> map);
 
-    String selectDangZeContentByArrangeIdAndUserId(Map<String, Object> map) throws Exception;
+    String selectDangZeContentByArrangeIdAndUserId(Map<String, Object> map);
 
-    List<ActivityAttachment> selectDangZeAttachmentByArrangeIdAndUserId(Map<String, Object> map) throws Exception;
+    List<ActivityAttachment> selectDangZeAttachmentByArrangeIdAndUserId(Map<String, Object> map);
 
-    void insertUserDangZe(Map<String, Object> map) throws Exception;
+    void insertUserDangZe(Map<String, Object> map);
 
-    void insertDangZe3Arrange(Map<String, Object> map) throws Exception;
+    void insertDangZe3Arrange(Map<String, Object> map);
 
-    List<DangZeCustom> selectDangZe3Customs(Map<String, Object> map) throws Exception;
+    List<DangZeCustom> selectDangZe3Customs(Map<String, Object> map);
 
-    Integer selectDangze3ArrangeCount(Map<String, Object> map) throws Exception;
+    Integer selectDangze3ArrangeCount(Map<String, Object> map);
+
+    Long selectDangZeContentIdByArrangeIdAndUserId(Map<String, Object> map);
+
+    void updateDangZeContent(Map<String, Object> map);
+
+    void updateDangZeState(Map<String, Object> map);
+
+    Integer selectDangZeScore(Map<String, Object> map);
 }

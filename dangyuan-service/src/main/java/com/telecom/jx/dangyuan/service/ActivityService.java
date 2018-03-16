@@ -4,6 +4,7 @@ import com.telecom.jx.dangyuan.pojo.po.*;
 import com.telecom.jx.dangyuan.pojo.vo.*;
 
 import java.util.List;
+import java.util.Map;
 
 public interface ActivityService {
     List<DangZe> getDangZes(Long userId, Long roleId) throws Exception;
@@ -30,4 +31,24 @@ public interface ActivityService {
     Long saveHonorsAwardContent(HonorsAwardContent honorsAwardContent, Long honorsAwardId, String time, Integer rate, Integer count) throws Exception;
 
     Long saveProfessDevelopContent(ProfessDevelopContent professDevelopContent, Long professdevelopId, String time, Integer rate, Integer count) throws Exception;
+
+    void editDangZeContent(Map<String, Object> map) throws Exception;
+
+    void editSheZeContent(Map<String, Object> map) throws Exception;
+
+    void editAchievementContent(Map<String, Object> map) throws Exception;
+
+    void editHonorsAwardContent(Map<String, Object> map) throws Exception;
+
+    void editProfessDevelopContent(Map<String, Object> map) throws Exception;
+
+    void updateDangZeState(Map<String, Object> map) throws Exception;
+
+    void updateSheZeState(Map<String, Object> map) throws Exception;
+
+    void updateAchievementState(Map<String, Object> map) throws Exception;
+
+    void updateHonorsAwardState(Map<String, Object> map) throws Exception;
+
+    void updateProfessDevelopState(Map<String, Object> map) throws Exception;
 }

@@ -23,4 +23,12 @@ public interface AchievementMapper {
     List<AchievementCustom> selectAchievement3Customs(Map<String, Object> map) throws Exception;
 
     Integer selectAchievement3ArrangeCount(Map<String, Object> map) throws Exception;
+
+    Long selectAchievementContentIdByArrangeIdAndUserId(Map<String, Object> map);
+
+    void updateAchievementContent(Map<String, Object> map);
+
+    void updateAchievementState(Map<String, Object> map);
+
+    Integer selectAchieveScore(Map<String, Object> scoreMap);
 }

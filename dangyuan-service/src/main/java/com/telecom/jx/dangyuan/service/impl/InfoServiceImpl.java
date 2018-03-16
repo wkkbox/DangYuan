@@ -35,13 +35,12 @@ public class InfoServiceImpl implements InfoService {
         map.put("currentPage", (currentPage - 1) * pageSize);
         map.put("pageSize", pageSize);
         map.put("year", Long.valueOf(DateUtil.getYear(new Date())));
+        map.put("userId", userId);
         //消息总数
-        Integer count = infoMapper.selectInfoSize(map);
-        System.out.println("count=" + count);
+        Integer count = infoMapper.selectInfoSize(map) + infoMapper.selectInfoUserSize(map);
         //查询本用户所有消息集合
         List<Info> infoList = infoMapper.selectInfoByPage(map);
         //查询本用户未读消息id集合
-        map.put("userId", userId);
         List<Long> unReadInfoIds = infoMapper.selectUnreadInfoId(map);
         //已读消息设置状态state为1
         for (Info item : infoList) {
@@ -59,10 +58,16 @@ public class InfoServiceImpl implements InfoService {
 
     @Override
     @Transactional(rollbackFor = {Exception.class})
-    public Info getInfoByInfoId(Long infoId) throws Exception {
+    public Info getInfoByInfoId(Long infoId, Long userId) throws Exception {
         Info info = infoMapper.selectInfoByInfoId(infoId);
+        if (info == null) {
+            info = infoMapper.selectInfoUserById(infoId);
+        }
         //将消息id为infoId的消息变为已读--->在数据库中删除t_user_unreadedinfo表中对应infoId的记录
-        infoMapper.updateInfoReaded(infoId);
+        Map<String, Object> map = new HashMap<>();
+        map.put("infoId", infoId);
+        map.put("userId", userId);
+        infoMapper.updateInfoReaded(map);
         return info;
     }
 

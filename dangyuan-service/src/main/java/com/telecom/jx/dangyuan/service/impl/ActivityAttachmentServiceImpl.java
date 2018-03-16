@@ -14,6 +14,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
 import java.io.InputStream;
+import java.util.Map;
 
 @Service
 public class ActivityAttachmentServiceImpl implements ActivityAttachmentService {
@@ -56,5 +57,10 @@ public class ActivityAttachmentServiceImpl implements ActivityAttachmentService 
         activityAttachment.setServerAddress(filePath + "/" + newName);//图片在服务器上的地址
         activityAttachment.setUploadTime(DateUtil.getCurrentDate("yyyy-MM-dd HH:mm:ss"));
         activityAttachmentMapper.insertActivityAttachment(activityAttachment);
+    }
+
+    @Override
+    public void delAttachmentByContentIdAndActivityType(Map<String, Object> map) throws Exception {
+        activityAttachmentMapper.deleteAttachmentByContentIdAndActivityType(map);
     }
 }

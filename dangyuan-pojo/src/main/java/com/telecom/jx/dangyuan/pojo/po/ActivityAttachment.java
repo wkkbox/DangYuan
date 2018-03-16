@@ -21,7 +21,7 @@ public class ActivityAttachment implements Serializable {
 
     @Override
     public String toString() {
-        return "id=" + id + ",localAddress=" + localAddress + ",serverAddress=" + serverAddress + ",attachmentType=" + attachmentType + ",uploadTime=" + uploadTime + ",contentId=" + contentId;
+        return "id=" + id + ",localAddress=" + localAddress + ",serverAddress=" + serverAddress + ",attachmentType=" + attachmentType + ",uploadTime=" + uploadTime + ",contentId=" + contentId+",activityType="+activityType;
     }
 
     public Long getId() {

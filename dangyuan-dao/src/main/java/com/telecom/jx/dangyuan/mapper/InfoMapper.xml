@@ -26,12 +26,21 @@
         WHERE roleId >= #{roleId} AND year = #{year}
     </select>
 
+    <select id="selectInfoUserSize" parameterType="java.util.Map" resultType="java.lang.Integer">
+        SELECT count(1)
+		FROM t_info_user
+		WHERE userId=#{userId} AND year=#{year}
+    </select>
+
     <!--分页查询本用户所有的消息集合-->
     <select id="selectInfoByPage" parameterType="java.util.Map" resultType="com.telecom.jx.dangyuan.pojo.po.Info">
-        SELECT
-        <include refid="baseSql"/>
-        FROM t_info i
-        WHERE roleId >= #{roleId} AND year = #{year}
+        SELECT id,title,content,year,publishtime,roleId
+        FROM t_info_user
+        WHERE userId=#{userId} AND year=#{year}
+        UNION ALL
+        SELECT id,title,content,year,publishtime,roleId
+        FROM t_info
+        WHERE roleId >=#{roleId} AND year = #{year}
         limit #{currentPage} , #{pageSize}
     </select>
 
@@ -50,9 +59,15 @@
         WHERE id = #{infoId}
     </select>
 
+    <select id="selectInfoUserById" parameterType="java.lang.Long" resultType="com.telecom.jx.dangyuan.pojo.po.Info">
+        SELECT  id,title,content,year,publishtime
+        FROM t_info_user
+        WHERE id=#{infoId}
+    </select>
+
     <!--将已读消息从t_user_unreadedinfo中删除-->
-    <delete id="updateInfoReaded" parameterType="java.lang.Long">
-        DELETE FROM t_user_unreadedinfo WHERE infoId = #{infoId}
+    <delete id="updateInfoReaded" parameterType="java.util.Map">
+        DELETE FROM t_user_unreadedinfo WHERE infoId = #{infoId} AND userId = #{userId}
     </delete>
 
 </mapper>

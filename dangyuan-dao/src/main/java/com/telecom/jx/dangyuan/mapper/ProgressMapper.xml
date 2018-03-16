@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.telecom.jx.dangyuan.mapper.ProgressMapper">
+
+    <select id="selectDangZeProgress" parameterType="java.util.Map"
+            resultType="com.telecom.jx.dangyuan.pojo.po.Progress">
+        SELECT title,commitTime,finishTime,rScore
+        FROM t_dangze
+        LEFT JOIN t_user_dangze
+        ON t_dangze.id=t_user_dangze.dangzeId
+        WHERE t_user_dangze.userId=#{userId} AND t_user_dangze.year=#{year}
+    </select>
+
+    <select id="selectSheZeProgress" parameterType="java.util.Map"
+            resultType="com.telecom.jx.dangyuan.pojo.po.Progress">
+        SELECT title,otherAttr,commitTime,finishTime,rScore
+        FROM t_sheze
+        LEFT JOIN t_user_sheze
+        ON t_sheze.id=t_user_sheze.shezeId
+        WHERE t_user_sheze.userId=#{userId} AND t_user_sheze.year=#{year}
+    </select>
+
+    <select id="selectAchieveProgress" parameterType="java.util.Map"
+            resultType="com.telecom.jx.dangyuan.pojo.po.Progress">
+        SELECT title,otherAttr,commitTime,finishTime,rScore
+        FROM t_achievement
+        LEFT JOIN t_user_achievement
+        ON t_achievement.id=t_user_achievement.achievementId
+        WHERE t_user_achievement.userId=#{userId} AND t_user_achievement.year=#{year}
+    </select>
+
+    <select id="selectHonorsAwardProgress" parameterType="java.util.Map"
+            resultType="com.telecom.jx.dangyuan.pojo.po.Progress">
+        SELECT title,otherAttr,commitTime,finishTime,rScore
+        FROM t_honorsaward
+        LEFT JOIN t_user_honorsaward
+        ON t_honorsaward.id=t_user_honorsaward.honorsAwardId
+        WHERE t_user_honorsaward.userId=#{userId} AND t_user_honorsaward.year=#{year}
+    </select>
+
+    <select id="selectProfessDevelopProgress" parameterType="java.util.Map"
+            resultType="com.telecom.jx.dangyuan.pojo.po.Progress">
+        SELECT title,otherAttr,commitTime,finishTime,rScore
+        FROM t_professdevelop
+        LEFT JOIN t_user_professdevelop
+        ON t_professdevelop.id=t_user_professdevelop.professdevelopId
+        WHERE t_user_professdevelop.userId=#{userId} AND t_user_professdevelop.year=#{year}
+    </select>
+
+</mapper>

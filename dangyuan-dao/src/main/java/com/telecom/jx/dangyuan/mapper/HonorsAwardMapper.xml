@@ -76,6 +76,12 @@
         WHERE d_c.userId = #{userId} AND d_c.arrangeId = #{arrangeId}
     </select>
 
+    <select id="selectHonorsAwardContentIdByArrangeIdAndUserId" parameterType="java.util.Map" resultType="java.lang.Long">
+        SELECT d_c.id
+        FROM t_honorsaward_content d_c
+        WHERE d_c.userId = #{userId} AND d_c.arrangeId = #{arrangeId}
+    </select>
+
     <insert id="insertUserHonorsAward" parameterType="java.util.Map">
         INSERT INTO t_user_honorsaward(userId,honorsAwardId,time,year,state,rScore,commitTime)
         VALUES (#{userId},#{honorsAwardId},#{time},#{year},#{state},#{rScore},#{commitTime})
@@ -91,6 +97,24 @@
         SELECT count(1) count
         FROM t_honorsaward3_arrange d3_a
         WHERE d3_a.year = #{year} AND d3_a.userId = #{userId} AND d3_a.honorsAwardId = #{honorsAwardId}
+    </select>
+
+    <update id="updateHonorsAwardContent" parameterType="java.util.Map">
+        UPDATE t_honorsaward_content
+        SET content=#{honorsAwardContent}
+        WHERE id=#{contentId}
+    </update>
+
+    <update id="updateHonorsAwardState" parameterType="java.util.Map">
+        UPDATE t_user_honorsaward
+        SET state=1
+        WHERE userId=#{userId} and time=#{time} and honorsAwardId=#{honorsAwardId}
+    </update>
+
+    <select id="selectHonorsAwardScore" parameterType="java.util.Map" resultType="java.lang.Integer">
+        SELECT SUM(rScore)
+        FROM t_user_honorsaward
+        WHERE userId=#{userId} AND year=#{year};
     </select>
 
 </mapper>

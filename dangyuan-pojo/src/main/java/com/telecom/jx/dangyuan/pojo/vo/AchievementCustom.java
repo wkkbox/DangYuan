@@ -19,6 +19,7 @@ public class AchievementCustom {
     private Long achievementId;//工作业绩id
     private Integer state;//状态，申请是0，申请中是1，完成是2，默认状态为0
     private Integer rScore;//真实得分，默认为0
+    private Long contentId;//content表主键
     private String commitContent;//用户提交内容
     private List<ActivityAttachment> attachmentList;//附件
     private Long arrangeId;//工作业绩安排表主键
@@ -166,5 +167,13 @@ public class AchievementCustom {
 
     public void setAchievementId(Long achievementId) {
         this.achievementId = achievementId;
+    }
+
+    public Long getContentId() {
+        return contentId;
+    }
+
+    public void setContentId(Long contentId) {
+        this.contentId = contentId;
     }
 }

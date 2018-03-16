@@ -19,6 +19,7 @@ public class SheZeCustom {
     private Long shezeId;//社责id
     private Integer state;//状态，申请是0，申请中是1，完成是2，默认状态为0
     private Integer rScore;//真实得分，默认为0
+    private Long contentId;//content表主键
     private String commitContent;//用户提交内容
     private List<ActivityAttachment> attachmentList;//附件
     private Long arrangeId;//社责安排表主键
@@ -164,5 +165,13 @@ public class SheZeCustom {
 
     public void setOtherAttr(Integer otherAttr) {
         this.otherAttr = otherAttr;
+    }
+
+    public Long getContentId() {
+        return contentId;
+    }
+
+    public void setContentId(Long contentId) {
+        this.contentId = contentId;
     }
 }

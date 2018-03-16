@@ -76,6 +76,12 @@
         WHERE d_c.userId = #{userId} AND d_c.arrangeId = #{arrangeId}
     </select>
 
+    <select id="selectProfessDevelopContentIdByArrangeIdAndUserId" parameterType="java.util.Map" resultType="java.lang.Long">
+        SELECT d_c.id
+        FROM t_professdevelop_content d_c
+        WHERE d_c.userId = #{userId} AND d_c.arrangeId = #{arrangeId}
+    </select>
+
     <insert id="insertUserProfessDevelop" parameterType="java.util.Map">
         INSERT INTO t_user_professdevelop(userId,professdevelopId,time,year,state,rScore,commitTime)
         VALUES (#{userId},#{professdevelopId},#{time},#{year},#{state},#{rScore},#{commitTime})
@@ -91,6 +97,24 @@
         SELECT count(1) count
         FROM t_professdevelop3_arrange d3_a
         WHERE d3_a.year = #{year} AND d3_a.userId = #{userId} AND d3_a.professdevelopId = #{professdevelopId}
+    </select>
+
+    <update id="updateProfessDevelopContent" parameterType="java.util.Map">
+        UPDATE t_professdevelop_content
+        SET content=#{professDevelopContent}
+        WHERE id=#{contentId}
+    </update>
+
+    <update id="updateProfessDevelopState" parameterType="java.util.Map">
+        UPDATE t_user_professdevelop
+        SET state=1
+        WHERE userId=#{userId} and time=#{time} and professdevelopId=#{professdevelopId}
+    </update>
+
+    <select id="selectProfessDevelopScore" parameterType="java.util.Map" resultType="java.lang.Integer">
+        SELECT SUM(rScore)
+        FROM t_user_professdevelop
+        WHERE userId=#{userId} AND year=#{year};
     </select>
 
 </mapper>

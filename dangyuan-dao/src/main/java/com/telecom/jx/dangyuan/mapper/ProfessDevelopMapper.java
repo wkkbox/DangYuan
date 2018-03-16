@@ -22,4 +22,12 @@ public interface ProfessDevelopMapper {
     List<ProfessDevelopCustom> selectProfessDevelop3Customs(Map<String, Object> map) throws Exception;
 
     Integer selectProfessDevelop3ArrangeCount(Map<String, Object> map) throws Exception;
+
+    Long selectProfessDevelopContentIdByArrangeIdAndUserId(Map<String, Object> map);
+
+    void updateProfessDevelopContent(Map<String, Object> map);
+
+    void updateProfessDevelopState(Map<String, Object> map);
+
+    Integer selectProfessDevelopScore(Map<String, Object> scoreMap);
 }

@@ -62,6 +62,9 @@ public class ActivityServiceImpl implements ActivityService {
         //查询附件内容
         for (DangZeCustom item : dangZeCustoms) {
             map.put("arrangeId", item.getArrangeId());
+
+            item.setContentId(dangZeMapper.selectDangZeContentIdByArrangeIdAndUserId(map));
+
             item.setCommitContent(dangZeMapper.selectDangZeContentByArrangeIdAndUserId(map));
             item.setAttachmentList(dangZeMapper.selectDangZeAttachmentByArrangeIdAndUserId(map));
             map.put("dangzeId", item.getDangzeId());
@@ -282,6 +285,9 @@ public class ActivityServiceImpl implements ActivityService {
         //查询附件内容
         for (SheZeCustom item : sheZeCustoms) {
             map.put("arrangeId", item.getArrangeId());
+
+            item.setContentId(sheZeMapper.selectSheZeContentIdByArrangeIdAndUserId(map));
+
             item.setCommitContent(sheZeMapper.selectSheZeContentByArrangeIdAndUserId(map));
             item.setAttachmentList(sheZeMapper.selectSheZeAttachmentByArrangeIdAndUserId(map));
             map.put("shezeId", item.getShezeId());
@@ -324,6 +330,9 @@ public class ActivityServiceImpl implements ActivityService {
         //查询附件内容
         for (AchievementCustom item : achievementCustoms) {
             map.put("arrangeId", item.getArrangeId());
+
+            item.setContentId(achievementMapper.selectAchievementContentIdByArrangeIdAndUserId(map));
+
             item.setCommitContent(achievementMapper.selectAchievementContentByArrangeIdAndUserId(map));
             item.setAttachmentList(achievementMapper.selectAchievementAttachmentByArrangeIdAndUserId(map));
             map.put("achievementId", item.getAchievementId());
@@ -366,6 +375,9 @@ public class ActivityServiceImpl implements ActivityService {
         //查询附件内容
         for (HonorsAwardCustom item : honorsAwardCustoms) {
             map.put("arrangeId", item.getArrangeId());
+
+            item.setContentId(honorsAwardMapper.selectHonorsAwardContentIdByArrangeIdAndUserId(map));
+
             item.setCommitContent(honorsAwardMapper.selectHonorsAwardContentByArrangeIdAndUserId(map));
             item.setAttachmentList(honorsAwardMapper.selectHonorsAwardAttachmentByArrangeIdAndUserId(map));
             map.put("honorsAwardId", item.getHonorsAwardId());
@@ -408,6 +420,9 @@ public class ActivityServiceImpl implements ActivityService {
         //查询附件内容
         for (ProfessDevelopCustom item : professDevelopCustoms) {
             map.put("arrangeId", item.getArrangeId());
+
+            item.setContentId(professDevelopMapper.selectProfessDevelopContentIdByArrangeIdAndUserId(map));
+
             item.setCommitContent(professDevelopMapper.selectProfessDevelopContentByArrangeIdAndUserId(map));
             item.setAttachmentList(professDevelopMapper.selectProfessDevelopAttachmentByArrangeIdAndUserId(map));
             map.put("professdevelopId", item.getProfessdevelopId());
@@ -425,5 +440,55 @@ public class ActivityServiceImpl implements ActivityService {
             }
         }
         return professDevelopCustoms;
+    }
+
+    @Override
+    public void editDangZeContent(Map<String, Object> map) throws Exception {
+        dangZeMapper.updateDangZeContent(map);
+    }
+
+    @Override
+    public void editSheZeContent(Map<String, Object> map) throws Exception {
+        sheZeMapper.updateSheZeContent(map);
+    }
+
+    @Override
+    public void editAchievementContent(Map<String, Object> map) throws Exception {
+        achievementMapper.updateAchievementContent(map);
+    }
+
+    @Override
+    public void editHonorsAwardContent(Map<String, Object> map) throws Exception {
+        honorsAwardMapper.updateHonorsAwardContent(map);
+    }
+
+    @Override
+    public void editProfessDevelopContent(Map<String, Object> map) throws Exception {
+        professDevelopMapper.updateProfessDevelopContent(map);
+    }
+
+    @Override
+    public void updateDangZeState(Map<String, Object> map) throws Exception {
+        dangZeMapper.updateDangZeState(map);
+    }
+
+    @Override
+    public void updateSheZeState(Map<String, Object> map) throws Exception {
+        sheZeMapper.updateSheZeState(map);
+    }
+
+    @Override
+    public void updateAchievementState(Map<String, Object> map) throws Exception {
+        achievementMapper.updateAchievementState(map);
+    }
+
+    @Override
+    public void updateHonorsAwardState(Map<String, Object> map) throws Exception {
+        honorsAwardMapper.updateHonorsAwardState(map);
+    }
+
+    @Override
+    public void updateProfessDevelopState(Map<String, Object> map) throws Exception {
+        professDevelopMapper.updateProfessDevelopState(map);
     }
 }

@@ -11,5 +11,5 @@ public interface InfoService {
 
     PageBean<Info> getInfos(Long userId, Long roleId, Integer currentPage, Integer pageSize) throws Exception;
 
-    Info getInfoByInfoId(Long infoId) throws Exception;
+    Info getInfoByInfoId(Long infoId, Long userId) throws Exception;
 }
