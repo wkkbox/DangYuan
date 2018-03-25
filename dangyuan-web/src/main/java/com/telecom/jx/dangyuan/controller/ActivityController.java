@@ -432,7 +432,6 @@ public class ActivityController {
             switch (activityAttachment.getAttachmentType()) {
                 //0是图片类型
                 case 0:
-
                     activityAttachmentService.uploadActivityImg(activityAttachment, multipartFile);
                     result = new MessageResult(true, "提交活动附件成功", null);
                     break;

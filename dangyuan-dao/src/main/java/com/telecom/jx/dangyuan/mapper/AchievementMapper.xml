@@ -18,7 +18,7 @@
     </sql>
 
     <sql id="achievementCustomBaseSql">
-        d_a.id arrangeId,d_a.month month,d_a.time time,d_a.achievementId achievementId,
+        distinct d_a.id arrangeId,d_a.month month,d_a.time time,d_a.achievementId achievementId,
         d.title title,d.content content,d.roleId roleId,d.dScore dScore,d.lScore lScore,d.hScore hScore,d.rate rate,d.otherAttr otherAttr,d.sumScore
     </sql>
 
@@ -66,7 +66,7 @@
         FROM t_activity_attachment a_a
         LEFT JOIN t_achievement_content d_c
         ON d_c.id = a_a.contentId
-        WHERE d_c.arrangeId = #{arrangeId} and d_c.userId = #{userId}
+        WHERE d_c.arrangeId = #{arrangeId} and d_c.userId = #{userId} and a_a.activityType = 2
     </select>
 
     <select id="selectAchievementContentByArrangeIdAndUserId" parameterType="java.util.Map" resultType="java.lang.String">

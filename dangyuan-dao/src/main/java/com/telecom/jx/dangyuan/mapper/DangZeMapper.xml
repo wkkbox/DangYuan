@@ -18,7 +18,7 @@
     </sql>
 
     <sql id="dangZeCustomBaseSql">
-        d_a.id arrangeId,d_a.month month,d_a.time time,d_a.dangzeId dangzeId,
+        distinct d_a.id arrangeId,d_a.month month,d_a.time time,d_a.dangzeId dangzeId,
         d.title title,d.content content,d.roleId roleId,d.dScore dScore,d.lScore lScore,d.hScore hScore,d.rate rate,d.sumScore
     </sql>
 
@@ -74,7 +74,7 @@
         FROM t_activity_attachment a_a
         LEFT JOIN t_dangze_content d_c
         ON d_c.id = a_a.contentId
-        WHERE d_c.arrangeId = #{arrangeId} and d_c.userId = #{userId}
+        WHERE d_c.arrangeId = #{arrangeId} and d_c.userId = #{userId} and a_a.activityType = 0
     </select>
 
     <select id="selectDangZeContentByArrangeIdAndUserId" parameterType="java.util.Map" resultType="java.lang.String">
@@ -122,7 +122,7 @@
     <select id="selectDangZeScore" parameterType="java.util.Map" resultType="java.lang.Integer">
         SELECT SUM(rScore)
         FROM t_user_dangze
-        WHERE userId=#{userId} AND year=#{year};
+        WHERE userId=#{userId} AND year=#{year}
     </select>
 
 </mapper>

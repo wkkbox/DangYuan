@@ -22,14 +22,11 @@ public class ActivityAttachmentServiceImpl implements ActivityAttachmentService 
     @Autowired
     private ActivityAttachmentMapper activityAttachmentMapper;
 
-    @Autowired
-    private DangZeMapper dangZeMapper;
-
     //加上注解@Transactional之后，这个方法就变成了事务方法
     //并不是事务方法越多越好，查询方法不需要添加为事务方法
     @Override
     @Transactional(rollbackFor = {Exception.class})
-    public void uploadActivityImg(ActivityAttachment activityAttachment, MultipartFile multipartFile) throws Exception {
+    public void uploadActivityImg2(ActivityAttachment activityAttachment, MultipartFile multipartFile) throws Exception {
         System.out.println("multipartFile=" + multipartFile);
         System.out.println("multipartFile.getBytes()=" + multipartFile.getBytes().length);
         System.out.println("multipartFile.getContentType()=" + multipartFile.getContentType());
@@ -48,7 +45,7 @@ public class ActivityAttachmentServiceImpl implements ActivityAttachmentService 
         //获取原有的文件名，包含扩展名
         String originalFilename = multipartFile.getOriginalFilename();
         String fileType = originalFilename.substring(originalFilename.lastIndexOf("."));
-        String newName = IDUtils.genImageName() + fileType;
+        String newName = IDUtils.getImageName() + fileType;
         System.out.println("newName=" + newName);
         InputStream inputStream = multipartFile.getInputStream();
         //执行上传操作
@@ -58,6 +55,34 @@ public class ActivityAttachmentServiceImpl implements ActivityAttachmentService 
         activityAttachment.setUploadTime(DateUtil.getCurrentDate("yyyy-MM-dd HH:mm:ss"));
         activityAttachmentMapper.insertActivityAttachment(activityAttachment);
     }
+
+    @Override
+    @Transactional(rollbackFor = {Exception.class})
+    public void uploadActivityImg(ActivityAttachment activityAttachment, MultipartFile multipartFile) throws Exception {
+        System.out.println("multipartFile=" + multipartFile);
+        System.out.println("multipartFile.getBytes()=" + multipartFile.getBytes().length);
+        System.out.println("multipartFile.getContentType()=" + multipartFile.getContentType());
+        System.out.println("multipartFile.getName()=" + multipartFile.getName());
+        System.out.println("multipartFile.getOriginalFilename()=" + multipartFile.getOriginalFilename());
+        System.out.println("multipartFile.getSize()=" + multipartFile.getSize());
+        //读取配置文件信息
+        String name = "config.properties";
+        String basePath = PropKit.use(name).get("config.fileBasePath");//   /home/dangyuan/image
+        String filePath = new DateTime().toString("/yyyyMMdd") + "/";
+        // 不存在文件夹创建文件夹
+        Utility.makeDirectory(basePath + filePath);
+        //获取原有的文件名，包含扩展名
+        String originalFilename = multipartFile.getOriginalFilename();
+        String fileType = originalFilename.substring(originalFilename.lastIndexOf("."));
+        String newName = IDUtils.getImageName() + fileType;
+        File file = new File(basePath + filePath + newName);
+        FileCopyUtils.copy(multipartFile.getBytes(), file);
+        //插入activityAttachment表
+        activityAttachment.setServerAddress(PropKit.use(name).get("config.serverAddress") + filePath + newName);//图片在服务器上的地址
+        activityAttachment.setUploadTime(DateUtil.getCurrentDate("yyyy-MM-dd HH:mm:ss"));
+        activityAttachmentMapper.insertActivityAttachment(activityAttachment);
+    }
+
 
     @Override
     public void delAttachmentByContentIdAndActivityType(Map<String, Object> map) throws Exception {
