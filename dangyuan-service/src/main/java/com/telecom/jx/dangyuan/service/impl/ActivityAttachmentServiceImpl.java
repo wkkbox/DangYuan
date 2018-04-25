@@ -24,6 +24,14 @@ public class ActivityAttachmentServiceImpl implements ActivityAttachmentService 
 
     //加上注解@Transactional之后，这个方法就变成了事务方法
     //并不是事务方法越多越好，查询方法不需要添加为事务方法
+
+    /**
+     * 有图片服务器方式，未使用
+     *
+     * @param activityAttachment
+     * @param multipartFile
+     * @throws Exception
+     */
     @Override
     @Transactional(rollbackFor = {Exception.class})
     public void uploadActivityImg2(ActivityAttachment activityAttachment, MultipartFile multipartFile) throws Exception {
@@ -56,6 +64,13 @@ public class ActivityAttachmentServiceImpl implements ActivityAttachmentService 
         activityAttachmentMapper.insertActivityAttachment(activityAttachment);
     }
 
+    /**
+     * tomcat配置了图片服务器方式
+     *
+     * @param activityAttachment
+     * @param multipartFile
+     * @throws Exception
+     */
     @Override
     @Transactional(rollbackFor = {Exception.class})
     public void uploadActivityImg(ActivityAttachment activityAttachment, MultipartFile multipartFile) throws Exception {

@@ -8,7 +8,6 @@ import com.telecom.jx.dangyuan.service.UserService;
 import com.telecom.jx.dangyuan.util.DateUtil;
 import com.telecom.jx.dangyuan.util.JsonUtils;
 import com.telecom.jx.dangyuan.util.dto.MessageResult;
-import org.apache.shiro.SecurityUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -124,39 +123,35 @@ public class ActivityController {
         MessageResult result = null;
         try {
 
-            if(dangZeContent.getId()!=null){
+            if (dangZeContent.getId() != null) {
                 //更新操作
                 Long contentId = dangZeContent.getId();
-                System.out.println("contentId="+contentId);
-                Map<String,Object> map = new HashMap<>();
-                map.put("contentId",contentId);
-                map.put("dangzeContent",dangZeContent.getContent());
+                System.out.println("contentId=" + contentId);
+                Map<String, Object> map = new HashMap<>();
+                map.put("contentId", contentId);
+                map.put("dangzeContent", dangZeContent.getContent());
                 activityService.editDangZeContent(map);
 
                 //修改进度表state为1
                 Long userId = dangZeContent.getUserId();
-                Map<String,Object> updateMap = new HashMap<>();
-                updateMap.put("dangzeId",dangzeId);
-                updateMap.put("time",time);
-                updateMap.put("userId",userId);
+                Map<String, Object> updateMap = new HashMap<>();
+                updateMap.put("dangzeId", dangzeId);
+                updateMap.put("time", time);
+                updateMap.put("userId", userId);
                 activityService.updateDangZeState(updateMap);
 
                 //删除原有附件
-                Map<String,Object> delMap = new HashMap<>();
-                map.put("contentId",contentId);
-                map.put("activityType",0);
+                Map<String, Object> delMap = new HashMap<>();
+                map.put("contentId", contentId);
+                map.put("activityType", 0);
                 activityAttachmentService.delAttachmentByContentIdAndActivityType(delMap);
-
                 result = new MessageResult(true, "更新党责活动记录成功", contentId);
-            }else {
+            } else {
                 //插入操作
                 dangZeContent.setYear(String.valueOf(DateUtil.getYear(new Date())));
                 Long dangZeContentId = activityService.saveDangZeContent(dangZeContent, dangzeId, time, rate, sumScore / dScore);
                 result = new MessageResult(true, "提交党责活动记录成功", dangZeContentId);
             }
-
-
-
         } catch (Exception e) {
             e.printStackTrace();
             result = new MessageResult(false, "提交党责活动记录失败", null);
@@ -186,38 +181,35 @@ public class ActivityController {
         System.out.println("sumScore" + sumScore);
         MessageResult result = null;
         try {
-            if(sheZeContent.getId()!=null){
+            if (sheZeContent.getId() != null) {
                 //更新操作
                 Long contentId = sheZeContent.getId();
-                System.out.println("contentId="+contentId);
-                Map<String,Object> map = new HashMap<>();
-                map.put("contentId",contentId);
-                map.put("sheZeContent",sheZeContent.getContent());
+                System.out.println("contentId=" + contentId);
+                Map<String, Object> map = new HashMap<>();
+                map.put("contentId", contentId);
+                map.put("sheZeContent", sheZeContent.getContent());
                 activityService.editSheZeContent(map);
 
                 //修改进度表state为1
                 Long userId = sheZeContent.getUserId();
-                Map<String,Object> updateMap = new HashMap<>();
-                updateMap.put("shezeId",shezeId);
-                updateMap.put("time",time);
-                updateMap.put("userId",userId);
+                Map<String, Object> updateMap = new HashMap<>();
+                updateMap.put("shezeId", shezeId);
+                updateMap.put("time", time);
+                updateMap.put("userId", userId);
                 activityService.updateSheZeState(updateMap);
 
                 //删除原有附件
-                Map<String,Object> delMap = new HashMap<>();
-                map.put("contentId",contentId);
-                map.put("activityType",1);
+                Map<String, Object> delMap = new HashMap<>();
+                map.put("contentId", contentId);
+                map.put("activityType", 1);
                 activityAttachmentService.delAttachmentByContentIdAndActivityType(delMap);
-
                 result = new MessageResult(true, "更新社责活动记录成功", contentId);
-            }else {
+            } else {
                 //插入操作
                 sheZeContent.setYear(String.valueOf(DateUtil.getYear(new Date())));
                 Long sheZeContentId = activityService.saveSheZeContent(sheZeContent, shezeId, time, rate, sumScore / dScore);
                 result = new MessageResult(true, "提交社责活动记录成功", sheZeContentId);
             }
-
-
         } catch (Exception e) {
             e.printStackTrace();
             result = new MessageResult(false, "提交社责活动记录失败", null);
@@ -248,39 +240,35 @@ public class ActivityController {
         MessageResult result = null;
         try {
 
-            if(achievementContent.getId()!=null){
+            if (achievementContent.getId() != null) {
                 //更新操作
                 Long contentId = achievementContent.getId();
-                System.out.println("contentId="+contentId);
-                Map<String,Object> map = new HashMap<>();
-                map.put("contentId",contentId);
-                map.put("achievementContent",achievementContent.getContent());
+                System.out.println("contentId=" + contentId);
+                Map<String, Object> map = new HashMap<>();
+                map.put("contentId", contentId);
+                map.put("achievementContent", achievementContent.getContent());
                 activityService.editAchievementContent(map);
 
                 //修改进度表state为1
                 Long userId = achievementContent.getUserId();
-                Map<String,Object> updateMap = new HashMap<>();
-                updateMap.put("achievementId",achievementId);
-                updateMap.put("time",time);
-                updateMap.put("userId",userId);
+                Map<String, Object> updateMap = new HashMap<>();
+                updateMap.put("achievementId", achievementId);
+                updateMap.put("time", time);
+                updateMap.put("userId", userId);
                 activityService.updateAchievementState(updateMap);
 
                 //删除原有附件
-                Map<String,Object> delMap = new HashMap<>();
-                map.put("contentId",contentId);
-                map.put("activityType",2);
+                Map<String, Object> delMap = new HashMap<>();
+                map.put("contentId", contentId);
+                map.put("activityType", 2);
                 activityAttachmentService.delAttachmentByContentIdAndActivityType(delMap);
-
                 result = new MessageResult(true, "更新工作业绩活动记录成功", contentId);
-            }else {
+            } else {
                 //插入操作
                 achievementContent.setYear(String.valueOf(DateUtil.getYear(new Date())));
                 Long achievementContentId = activityService.saveAchievementContent(achievementContent, achievementId, time, rate, sumScore / dScore);
                 result = new MessageResult(true, "提交工作业绩活动记录成功", achievementContentId);
             }
-
-
-
         } catch (Exception e) {
             e.printStackTrace();
             result = new MessageResult(false, "提交工作业绩活动记录失败", null);
@@ -311,40 +299,35 @@ public class ActivityController {
         MessageResult result = null;
         try {
 
-            if(honorsAwardContent.getId()!=null){
+            if (honorsAwardContent.getId() != null) {
                 //更新操作
                 Long contentId = honorsAwardContent.getId();
-                System.out.println("contentId="+contentId);
-                Map<String,Object> map = new HashMap<>();
-                map.put("contentId",contentId);
-                map.put("honorsAwardContent",honorsAwardContent.getContent());
+                System.out.println("contentId=" + contentId);
+                Map<String, Object> map = new HashMap<>();
+                map.put("contentId", contentId);
+                map.put("honorsAwardContent", honorsAwardContent.getContent());
                 activityService.editHonorsAwardContent(map);
 
                 //修改进度表state为1
                 Long userId = honorsAwardContent.getUserId();
-                Map<String,Object> updateMap = new HashMap<>();
-                updateMap.put("honorsAwardId",honorsAwardId);
-                updateMap.put("time",time);
-                updateMap.put("userId",userId);
+                Map<String, Object> updateMap = new HashMap<>();
+                updateMap.put("honorsAwardId", honorsAwardId);
+                updateMap.put("time", time);
+                updateMap.put("userId", userId);
                 activityService.updateHonorsAwardState(updateMap);
 
                 //删除原有附件
-                Map<String,Object> delMap = new HashMap<>();
-                map.put("contentId",contentId);
-                map.put("activityType",3);
+                Map<String, Object> delMap = new HashMap<>();
+                map.put("contentId", contentId);
+                map.put("activityType", 3);
                 activityAttachmentService.delAttachmentByContentIdAndActivityType(delMap);
-
                 result = new MessageResult(true, "更新荣誉奖励活动记录成功", contentId);
-            }else {
+            } else {
                 //插入操作
                 honorsAwardContent.setYear(String.valueOf(DateUtil.getYear(new Date())));
                 Long honorsAwardContentId = activityService.saveHonorsAwardContent(honorsAwardContent, honorsAwardId, time, rate, sumScore / dScore);
                 result = new MessageResult(true, "提交荣誉奖励活动记录成功", honorsAwardContentId);
             }
-
-
-
-
         } catch (Exception e) {
             e.printStackTrace();
             result = new MessageResult(false, "提交荣誉奖励活动记录失败", null);
@@ -375,39 +358,35 @@ public class ActivityController {
         MessageResult result = null;
         try {
 
-            if(professDevelopContent.getId()!=null){
+            if (professDevelopContent.getId() != null) {
                 //更新操作
                 Long contentId = professDevelopContent.getId();
-                System.out.println("contentId="+contentId);
-                Map<String,Object> map = new HashMap<>();
-                map.put("contentId",contentId);
-                map.put("professDevelopContent",professDevelopContent.getContent());
+                System.out.println("contentId=" + contentId);
+                Map<String, Object> map = new HashMap<>();
+                map.put("contentId", contentId);
+                map.put("professDevelopContent", professDevelopContent.getContent());
                 activityService.editProfessDevelopContent(map);
 
                 //修改进度表state为1
                 Long userId = professDevelopContent.getUserId();
-                Map<String,Object> updateMap = new HashMap<>();
-                updateMap.put("professdevelopId",professdevelopId);
-                updateMap.put("time",time);
-                updateMap.put("userId",userId);
+                Map<String, Object> updateMap = new HashMap<>();
+                updateMap.put("professdevelopId", professdevelopId);
+                updateMap.put("time", time);
+                updateMap.put("userId", userId);
                 activityService.updateProfessDevelopState(updateMap);
 
                 //删除原有附件
-                Map<String,Object> delMap = new HashMap<>();
-                map.put("contentId",contentId);
-                map.put("activityType",4);
+                Map<String, Object> delMap = new HashMap<>();
+                map.put("contentId", contentId);
+                map.put("activityType", 4);
                 activityAttachmentService.delAttachmentByContentIdAndActivityType(delMap);
-
                 result = new MessageResult(true, "更新专业提升活动记录成功", contentId);
-
-            }else {
+            } else {
                 //插入操作
                 professDevelopContent.setYear(String.valueOf(DateUtil.getYear(new Date())));
                 Long professDevelopContentId = activityService.saveProfessDevelopContent(professDevelopContent, professdevelopId, time, rate, sumScore / dScore);
                 result = new MessageResult(true, "提交专业提升活动记录成功", professDevelopContentId);
             }
-
-
         } catch (Exception e) {
             e.printStackTrace();
             result = new MessageResult(false, "提交专业提升活动记录失败", null);
@@ -416,7 +395,7 @@ public class ActivityController {
     }
 
     /**
-     * 上传完成的活动的活动附件(目前为图片)
+     * 上传完成的活动的活动附件(目前为图片)（localAddress，attachmentType，contentId，activityType）
      *
      * @param activityAttachment
      * @param multipartFile
@@ -426,7 +405,7 @@ public class ActivityController {
     @RequestMapping(value = {"/activityAttachment"}, produces = "application/json;charset=utf-8")
     public String saveActivityAttachment(ActivityAttachment activityAttachment, MultipartFile multipartFile) {
         System.out.println("activityAttachment = " + activityAttachment);
-        System.out.println("multipartFile="+multipartFile);
+        System.out.println("multipartFile=" + multipartFile);
         MessageResult result = null;
         try {
             switch (activityAttachment.getAttachmentType()) {
@@ -442,6 +421,5 @@ public class ActivityController {
         }
         return JsonUtils.objectToJson(result);
     }
-
 
 }

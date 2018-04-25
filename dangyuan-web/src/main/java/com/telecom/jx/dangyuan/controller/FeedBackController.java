@@ -16,6 +16,12 @@ public class FeedBackController {
     @Autowired
     private FeedBackService feedBackService;
 
+    /**
+     * 添加反馈信息
+     *
+     * @param feedBack
+     * @return
+     */
     @RequestMapping(value = {"/addFeedBack"}, produces = "application/json;charset=utf-8")
     @ResponseBody
     public String addFeedBack(FeedBack feedBack) {

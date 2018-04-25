@@ -16,6 +16,11 @@ public class VersionController {
     @Autowired
     private VersionService versionService;
 
+    /**
+     * 获得版本以检测是否更新
+     *
+     * @return
+     */
     @ResponseBody
     @RequestMapping(value = {"/getVersion"}, produces = "application/json;charset=utf-8")
     public String getVersion() {

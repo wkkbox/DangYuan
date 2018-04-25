@@ -22,6 +22,12 @@ public class ProgressController {
     @Autowired
     private ProgressService progressService;
 
+    /**
+     * 得到每个人的活动的进度，申请中，已完成
+     *
+     * @param userId
+     * @return
+     */
     @RequestMapping(value = {"/progresses"}, produces = "application/json;charset=utf-8")
     @ResponseBody
     public String getProgresses(Long userId) {

@@ -39,7 +39,7 @@ public class UserController {
     private InfoService infoService;
 
     /**
-     * 登录控制器
+     * 登录控制器（accountName，password）
      *
      * @param user
      * @param model
@@ -96,6 +96,14 @@ public class UserController {
         return JsonUtils.objectToJson(new MessageResult(true, "登录成功", currentUser));
     }
 
+    /**
+     * 修改密码
+     *
+     * @param oldPwd
+     * @param newPwd
+     * @param accountName
+     * @return
+     */
     @ResponseBody
     @RequestMapping(value = {"/editPassword"}, produces = "application/json;charset=utf-8")
     public String editPassword(String oldPwd, String newPwd, String accountName) {
@@ -103,12 +111,12 @@ public class UserController {
         User currentUser = null;
         try {
             currentUser = userService.getUserByAccountName(accountName);
-            if(currentUser==null){
+            if (currentUser == null) {
                 result = new MessageResult(false, "帐户名错误", null);
-            }else {
-                if(!currentUser.getPassword().equals(CryptographyUtil.md5(oldPwd, "dangyuan", 2))){
+            } else {
+                if (!currentUser.getPassword().equals(CryptographyUtil.md5(oldPwd, "dangyuan", 2))) {
                     result = new MessageResult(false, "原密码输入错误", null);
-                }else {
+                } else {
                     try {
                         System.out.println("currentUser.getId()=" + currentUser.getId());
                         userService.editPassword(currentUser.getId(), newPwd);
@@ -126,7 +134,7 @@ public class UserController {
     }
 
     /**
-     * 管理员退出控制器,app没用到
+     * 管理员退出控制器，未使用
      *
      * @return
      */
@@ -160,24 +168,45 @@ public class UserController {
         return JsonUtils.objectToJson(result);
     }
 
+    /**
+     * 未使用
+     *
+     * @return
+     */
     @RequestMapping("/createUser")
     @RequiresRoles("admin")
     public String addUser() {
         return "addUser";
     }
 
+    /**
+     * 未使用
+     *
+     * @return
+     */
     @RequestMapping("/deleteUser")
     @RequiresRoles("admin")
     public String delUser() {
         return "delUser";
     }
 
+    /**
+     * 未使用
+     *
+     * @return
+     */
     @RequestMapping("/updateUser")
     @RequiresPermissions(value = {"user:update"})
     public String updateUser() {
         return "updateUser";
     }
 
+    /**
+     * 未使用
+     *
+     * @param model
+     * @return
+     */
     @RequestMapping("/listUser")
     @RequiresPermissions(value = {"user:view"})
     public String showUsers(Model model) {
